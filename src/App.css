@@ -12,33 +12,19 @@
 }
 
 .App-logo {
-  /* padding: 10px; */
-  margin: 10px;
+  width: 90%;
+  padding: 10px;
+  margin-top: 20px;
   position: fixed;
   top: 0px;
 }
 
 .background-img {
-  background-image: url("./CD_reflection.png");
-  background-position: right;
+  background-image: url("./CD_Reflection_background.png");
+  background-position: 85%;
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center, center;
 }
-
-/* .App-header {
-  
-} */
 
 .App-link {
   color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
