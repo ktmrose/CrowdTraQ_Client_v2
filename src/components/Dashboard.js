@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Dashboard.css';
-import { faFire, faBan } from '@fortawesome/free-solid-svg-icons'
+import { faFire, faBan, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Dashboard = (props) => { //props.accessToken to make requests to server
@@ -24,7 +24,8 @@ const Dashboard = (props) => { //props.accessToken to make requests to server
             </div>
             <div className="btn-container">
                 <button className="btn">
-                    Add Song
+                    <FontAwesomeIcon icon={faPlus} />
+                    {' '} Add Song
                 </button>
             </div>
         </div>
