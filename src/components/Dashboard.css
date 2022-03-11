@@ -1,9 +1,36 @@
 .container {
-    display: flex;
     margin: 10px;
     border: 2px solid chartreuse;
+    width: 90%;
 }
 
-.p {
-    font-size: 14px;
+.icon-container {
+    color: #ce2857;
+    /* TODO: figure out how to make color a linear gradient */
+}
+
+.reaction-icon {
+    padding: 10px;
+    height: 8em;
+    vertical-align: top;
+}
+
+.icon-text {
+    padding: 30px;
+    display: flex;
+}
+
+#head span {
+    padding: 30px;
+}
+
+.btn {
+    background-color: #3de526;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 0.5rem 1rem;
+    margin: 1em auto;
+    font-size: 1.25rem;
+    border-radius: 0.3rem;
+    width: 100%;
+    font-weight: bolder;
 }
