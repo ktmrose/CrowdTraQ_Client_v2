@@ -25,6 +25,9 @@
   background-repeat: no-repeat;
 }
 
-.App-link {
-  color: #61dafb;
+.icon {
+  height: 2.5em;
+  bottom: 0;
+  margin-bottom: 10px;
+  position: absolute;
 }

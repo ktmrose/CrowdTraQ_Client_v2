@@ -14,7 +14,7 @@ function App() {
         <Dashboard
           // accessToken={accessToken}
         />
-        <FontAwesomeIcon icon={faCircleQuestion} />
+        <FontAwesomeIcon className="icon" icon={faCircleQuestion} />
     </div>
   );
 }
