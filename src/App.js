@@ -1,11 +1,12 @@
 import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className="App background-img">
+      {/* <header className="App-header"> */}
+        <img src={logo} className="App-logo" alt="CrowdTraQ logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload. Taco meat!
         </p>
@@ -17,7 +18,7 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      {/* </header> */}
     </div>
   );
 }
