@@ -27,7 +27,7 @@ const Dashboard = (props) => { //props.accessToken to make requests to server
                 </div> */}
             </div>
             <div className="btn-container">
-                <button className="btn" onClick={() => addSong()}>
+                <button onClick={() => addSong()}>
                     <FontAwesomeIcon icon={faPlus} />
                     {' '} Add Song
                 </button>

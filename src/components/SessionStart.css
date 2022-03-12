@@ -1,0 +1,10 @@
+input {
+    background-color: #d8ffff;
+    height: 2em;
+    min-width: 80vw;
+    border-radius: 20px;
+    border-style: groove;
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 3rem;
+}

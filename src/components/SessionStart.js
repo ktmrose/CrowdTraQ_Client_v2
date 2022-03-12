@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import './SessionStart.css'
 
 const SessionStart = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
