@@ -18,6 +18,7 @@ const SessionStart = (props) => {
                 <input 
                     type="text"
                     name="room-code"
+                    maxLength="4"
                     {...register("room-code")}
                     pattern="^[a-zA-Z0-9]+$"
                     title="Numbers and letters only"

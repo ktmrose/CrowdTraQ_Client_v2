@@ -1,7 +1,7 @@
 input {
     background-color: #d8ffff;
     height: 2em;
-    min-width: 80vw;
+    width: 100%;
     border-radius: 20px;
     border-style: groove;
     text-align: center;
