@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
 import { faFire, faBan, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Dashboard = (props) => { //props.accessToken to make requests to server
-    const [tokens, setTokens] = useState(12); //TODO: set from server
-    const [currentSong, setCurrentSong] = useState("{Current Song}"); //TODO: set from server
-    const [currentArtist, setCurrentArtist] = useState("{Current Artist}"); //TODO: set from server
+    const [tokens, setTokens] = useState(0); //TODO: set from server
+    const [currentSong, setCurrentSong] = useState(""); //TODO: set from server
+    const [currentArtist, setCurrentArtist] = useState(""); //TODO: set from server
+
+    useEffect(() => {
+        //TODO get data from server
+
+        //test data
+        setTokens(12);
+        setCurrentSong("{Current Song")
+        setCurrentArtist("{Current Artist}")
+    }, [props])
 
     //TODO: addTokens upon Websocket state push.
     const addSong = () => {

@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import Dashboard from './components/Dashboard';
 import SessionStart from './components/SessionStart';
@@ -13,6 +13,14 @@ function App() {
     //check session storage for token
   }, [accessToken])
 
+  const sessionStartCallback = useCallback(
+    () => {
+      //get access token from server
+      console.log("session start callback called")
+      setAccessToken("tempAccessToken")
+      //also set session storage
+    }, [],)
+
   return (
     <div className="App background-img">
         <img src={logo} className="App-logo" alt="CrowdTraQ logo" />
@@ -21,7 +29,9 @@ function App() {
             // accessToken={accessToken}
           />
           :
-          <SessionStart />
+          <SessionStart 
+            loginSuccess={sessionStartCallback}
+          />
         }
         <FontAwesomeIcon className="icon" icon={faCircleQuestion} />
     </div>

@@ -3,10 +3,11 @@ import { useForm } from 'react-hook-form';
 import './SessionStart.css'
 
 const SessionStart = (props) => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit} = useForm();
 
     const onFormSubmit = (data) => {
         console.log(data);
+        props.loginSuccess();
         //TODO: send data to server
     }
 
