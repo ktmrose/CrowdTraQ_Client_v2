@@ -9,6 +9,10 @@ const Dashboard = (props) => { //props.accessToken to make requests to server
     const [currentArtist, setCurrentArtist] = useState("{Current Artist}"); //TODO: set from server
 
     //TODO: addTokens upon Websocket state push.
+    const addSong = () => {
+        console.log("Add song button clicked")
+        //TODO: Open AddSong modal
+    }
 
     return (
         <div className="container">
@@ -23,7 +27,7 @@ const Dashboard = (props) => { //props.accessToken to make requests to server
                 </div> */}
             </div>
             <div className="btn-container">
-                <button className="btn">
+                <button className="btn" onClick={() => addSong()}>
                     <FontAwesomeIcon icon={faPlus} />
                     {' '} Add Song
                 </button>
