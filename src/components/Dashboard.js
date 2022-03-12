@@ -7,6 +7,7 @@ const Dashboard = (props) => { //props.accessToken to make requests to server
     const [tokens, setTokens] = useState(0); //TODO: set from server
     const [currentSong, setCurrentSong] = useState(""); //TODO: set from server
     const [currentArtist, setCurrentArtist] = useState(""); //TODO: set from server
+    const [providedReaction, setProvidedReaction] = useState(false);
 
     useEffect(() => {
         //TODO get data from server
@@ -25,24 +26,32 @@ const Dashboard = (props) => { //props.accessToken to make requests to server
 
     const sendFireReaction = () => {
         console.log("HOT!")
+        setProvidedReaction(true);
     }
 
     const sendNotReaction = () => {
         console.log("NOT!")
+        setProvidedReaction(true);
     }
 
     return (
         <div className="container">
             <h4>Tokens: {tokens}</h4>
-            <h1>How do you like {currentSong} by {currentArtist} ?</h1>
-            <div className="icon-container">
-                <FontAwesomeIcon className="reaction-icon" icon={faFire} onClick={() => sendFireReaction()}/>
-                <FontAwesomeIcon className="reaction-icon" icon={faBan} onClick={() => sendNotReaction()}/>
-                {/* <div className="icon-text">
-                    <span>HOT!</span>
-                    <span>NOT!</span>
-                </div> */}
-            </div>
+            {providedReaction ?
+                <h1>Thanks for your feedback!</h1>
+                :
+                <>
+                    <h1>How do you like {currentSong} by {currentArtist} ?</h1>
+                    <div className="icon-container">
+                        <FontAwesomeIcon className="reaction-icon" icon={faFire} onClick={() => sendFireReaction()} />
+                        <FontAwesomeIcon className="reaction-icon" icon={faBan} onClick={() => sendNotReaction()} />
+                        {/* <div className="icon-text">
+                        <span>HOT!</span>
+                        <span>NOT!</span>
+                    </div> */}
+                    </div>
+                </>
+            }
             <div className="btn-container">
                 <button onClick={() => addSong()}>
                     <FontAwesomeIcon icon={faPlus} />
