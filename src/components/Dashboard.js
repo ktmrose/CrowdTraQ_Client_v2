@@ -23,13 +23,21 @@ const Dashboard = (props) => { //props.accessToken to make requests to server
         //TODO: Open AddSong modal
     }
 
+    const sendFireReaction = () => {
+        console.log("HOT!")
+    }
+
+    const sendNotReaction = () => {
+        console.log("NOT!")
+    }
+
     return (
         <div className="container">
             <h4>Tokens: {tokens}</h4>
             <h1>How do you like {currentSong} by {currentArtist} ?</h1>
             <div className="icon-container">
-                <FontAwesomeIcon className="reaction-icon" icon={faFire} />
-                <FontAwesomeIcon className="reaction-icon" icon={faBan} />
+                <FontAwesomeIcon className="reaction-icon" icon={faFire} onClick={() => sendFireReaction()}/>
+                <FontAwesomeIcon className="reaction-icon" icon={faBan} onClick={() => sendNotReaction()}/>
                 {/* <div className="icon-text">
                     <span>HOT!</span>
                     <span>NOT!</span>

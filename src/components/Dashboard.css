@@ -13,6 +13,7 @@
     padding: 10px;
     height: 8em;
     vertical-align: top;
+    /* TODO: add breakpoints for icon spacing */
 }
 
 .icon-text {
