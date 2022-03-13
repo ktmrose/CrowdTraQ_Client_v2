@@ -22,6 +22,7 @@ const SessionStart = (props) => {
                     maxLength="4"
                     {...register("room-code")}
                     pattern="^[a-zA-Z0-9]+$"
+                    required
                     title="Numbers and letters only"
                 />
                 <button className="btn">Enter</button>

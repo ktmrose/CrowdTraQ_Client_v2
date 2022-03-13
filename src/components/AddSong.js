@@ -43,6 +43,7 @@ const AddSong = (props) => {
                     name="add-song"
                     {...register("add-song")}
                     pattern="^[a-zA-Z0-9]+$"
+                    required
                     title="Numbers and letters only"
                 />
                 <button className="btn">

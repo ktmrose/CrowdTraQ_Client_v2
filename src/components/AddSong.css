@@ -1,15 +1,16 @@
 .modal-body {
     text-align: center;
     padding: 30px;
-
+    height: 80%;
     margin: 1em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: #af449b;
+    background-color: #010101;
+    color: #fbff00;
 }
 
 .close-icon {
     float: right;
     text-align: right;
-    color: #010101;
+    color: #fbff00;
     height: 2.5em;
 }

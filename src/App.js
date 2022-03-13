@@ -7,7 +7,7 @@ import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function App() {
-  const [accessToken, setAccessToken] = useState(""); //used to connect to server
+  const [accessToken, setAccessToken] = useState(); //used to connect to server
 
   useEffect(() => {
     //check session storage for token
