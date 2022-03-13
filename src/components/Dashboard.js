@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
 import { faFire, faBan, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import AddSong from './AddSong';
 
 const Dashboard = (props) => { //props.accessToken to make requests to server
     const [tokens, setTokens] = useState(0); //TODO: set from server
     const [currentSong, setCurrentSong] = useState(""); //TODO: set from server
     const [currentArtist, setCurrentArtist] = useState(""); //TODO: set from server
     const [providedReaction, setProvidedReaction] = useState(false);
+    const [isAddingSong, setIsAddingSong] = useState(false);
 
     useEffect(() => {
         //TODO get data from server
@@ -21,7 +23,7 @@ const Dashboard = (props) => { //props.accessToken to make requests to server
     //TODO: addTokens upon Websocket state push.
     const addSong = () => {
         console.log("Add song button clicked")
-        //TODO: Open AddSong modal
+        setIsAddingSong(true);
     }
 
     const sendFireReaction = () => {
@@ -34,30 +36,42 @@ const Dashboard = (props) => { //props.accessToken to make requests to server
         setProvidedReaction(true);
     }
 
+    const returnToDashCallback = () => {
+        setIsAddingSong(false);
+    }
+
     return (
         <div className="container">
             <h4>Tokens: {tokens}</h4>
-            {providedReaction ?
-                <h1>Thanks for your feedback!</h1>
+            {isAddingSong ?
+                <AddSong
+                    toDashBoard={returnToDashCallback}
+                />
                 :
                 <>
-                    <h1>How do you like {currentSong} by {currentArtist} ?</h1>
-                    <div className="icon-container">
-                        <FontAwesomeIcon className="reaction-icon" icon={faFire} onClick={() => sendFireReaction()} />
-                        <FontAwesomeIcon className="reaction-icon" icon={faBan} onClick={() => sendNotReaction()} />
-                        {/* <div className="icon-text">
-                        <span>HOT!</span>
-                        <span>NOT!</span>
-                    </div> */}
+                    {providedReaction ?
+                        <h1>Thanks for your feedback!</h1>
+                        :
+                        <>
+                            <h1>How do you like {currentSong} by {currentArtist} ?</h1>
+                            <div className="icon-container">
+                                <FontAwesomeIcon className="reaction-icon" icon={faFire} onClick={() => sendFireReaction()} />
+                                <FontAwesomeIcon className="reaction-icon" icon={faBan} onClick={() => sendNotReaction()} />
+                                {/* <div className="icon-text">
+                            <span>HOT!</span>
+                            <span>NOT!</span>
+                        </div> */}
+                            </div>
+                        </>
+                    }
+                    <div className="btn-container">
+                        <button onClick={() => addSong()}>
+                            <FontAwesomeIcon icon={faPlus} />
+                            {' '} Add Song
+                </button>
                     </div>
                 </>
             }
-            <div className="btn-container">
-                <button onClick={() => addSong()}>
-                    <FontAwesomeIcon icon={faPlus} />
-                    {' '} Add Song
-                </button>
-            </div>
         </div>
     )
 }

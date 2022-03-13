@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import './SessionStart.css'
 
 const SessionStart = (props) => {
-    const { register, handleSubmit} = useForm();
+    const { register, handleSubmit } = useForm();
 
     const onFormSubmit = (data) => {
         console.log(data);
