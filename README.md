@@ -1,70 +1,22 @@
-# Getting Started with Create React App
+![CrowdTraQ logo](./src/logo.svg)
+
+# CrowdTraQ Client v2.0:
+## Real-time playlist creation with the Crowd, by the Crowd
+
+![CrowdTraQ intro image](./src/CrowdTraQIntro.png)
+
+Have you passed the aux cord only to realize with utter despair that you have relinquished control to someone who thinks good music is nothing more than a hideous disgrace against nature itself? 
+
+Previously you had to be the authoritarian to take back control, or perhaps you relied on your trusted allies to publically shame the offender. You can do that still, but now with **CrowdTraQ**, based on the majority of the crowd. A little group-think never hurt anyone...
+
+Everyone begins with 12 tokens (first round is on the house). Use these tokens to queue up songs of your choice (as long as they are on Spotify), but the number of tokens required to add songs *increases* with the size of the queue. If you don't have enough tokens to add now, don't worry; if there are no songs queued up, adding a song is free!
+
+Want more tokens? Add songs that you think the majority of people will like, at least enough to hit the :fire: button anyway. Yes, you can give yourself the shameless self-vote -- don't worry, I won't tell anybody. :wink:
+
+Trolls, beware! If the majority of people hate a song that you had queued up so much they hit the dislike button, that song ends (even before it officially does) and you don't get those tokens back. :sob:
+
+:tada: So get the room code from the party host and add to the party vibes! :tada:
+
+Version 1 was designed initially to fulfill capstone graduation requirements for the Master of Software Development Program from the University of Utah. Immediate plans for these repos include: archiving. 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
