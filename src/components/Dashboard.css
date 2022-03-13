@@ -29,7 +29,7 @@ button {
     background-color: #3de526;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     padding: 1rem 2rem;
-    margin: 1em auto;
+    margin: 1em auto, 0.5em;
     font-size: 2rem;
     border-radius: 0.3rem;
     width: 100%;
