@@ -8,7 +8,7 @@ const SessionStart = (props) => {
   const { register, handleSubmit } = useForm();
 
   const onFormSubmit = (data) => {
-    //connect with server, if successful,
+    //connect with server, if successful, set cookie
 
     cookies.set("CTQ_TOKEN", data?.roomCode, {
       path: "/",
