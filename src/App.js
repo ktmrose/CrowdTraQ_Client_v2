@@ -2,7 +2,6 @@ import logo from "./logo.svg";
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Dashboard from "./components/Dashboard";
-import SessionStart from "./components/SessionStart";
 import { faCircleQuestion, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "react-modal";
@@ -10,9 +9,8 @@ import img from "./CrowdTraQIntro.png";
 import { useWebsocketConnection } from "./context/websocket";
 
 function App() {
-  const [accessToken, setAccessToken] = useState();
   const [showHelpModal, setShowHelpModal] = useState(false);
-  const { connectWebsocket } = useWebsocketConnection();
+  const { connectWebsocket, socket } = useWebsocketConnection();
 
   //connect to server only once upon app load
   useEffect(() => {
@@ -100,11 +98,7 @@ function App() {
       </Modal>
       <div className="App background-img">
         <img src={logo} className="App-logo" alt="CrowdTraQ logo" />
-        {accessToken ? (
-          <Dashboard />
-        ) : (
-          <SessionStart setAccessToken={setAccessToken} />
-        )}
+        {socket && <Dashboard />}
         <FontAwesomeIcon
           className="icon"
           icon={faCircleQuestion}
