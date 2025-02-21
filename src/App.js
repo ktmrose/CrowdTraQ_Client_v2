@@ -1,5 +1,5 @@
 import logo from "./logo.svg";
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Dashboard from "./components/Dashboard";
 import SessionStart from "./components/SessionStart";
@@ -7,20 +7,18 @@ import { faCircleQuestion, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "react-modal";
 import img from "./CrowdTraQIntro.png";
-import { Cookies } from "react-cookie";
+import { useWebsocketConnection } from "./context/websocket";
 
 function App() {
-  const cookies = useMemo(() => new Cookies(), []);
-  const [accessToken, setAccessToken] = useState(
-    cookies.get("CTQ_TOKEN") || ""
-  ); //used to connect to server
+  const [accessToken, setAccessToken] = useState();
   const [showHelpModal, setShowHelpModal] = useState(false);
+  const { connectWebsocket } = useWebsocketConnection();
 
+  //connect to server only once upon app load
   useEffect(() => {
-    if (!accessToken && cookies.get("CTQ_TOKEN")) {
-      setAccessToken(cookies.get("CTQ_TOKEN"));
-    }
-  }, [accessToken, cookies]);
+    connectWebsocket();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const toggleHelpModal = () => {
     if (showHelpModal) {
@@ -103,9 +101,7 @@ function App() {
       <div className="App background-img">
         <img src={logo} className="App-logo" alt="CrowdTraQ logo" />
         {accessToken ? (
-          <Dashboard
-          // accessToken={accessToken}
-          />
+          <Dashboard />
         ) : (
           <SessionStart setAccessToken={setAccessToken} />
         )}

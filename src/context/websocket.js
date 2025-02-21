@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState, useContext } from "react";
+import React, { createContext, useState, useContext } from "react";
 
 const WebsocketContext = createContext({});
 
@@ -6,8 +6,8 @@ const WebsocketProvider = (props) => {
   const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
 
-  useEffect(() => {
-    const ws = new WebSocket("ws://localhost:YOUR_PORT");
+  const connectWebsocket = () => {
+    const ws = new WebSocket("ws://localhost:7890");
 
     ws.onopen = () => {
       console.log("WebSocket connection established");
@@ -29,19 +29,23 @@ const WebsocketProvider = (props) => {
     setSocket(ws);
 
     return () => {
-      ws.close();
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.close();
+      }
     };
-  }, []);
+  };
 
   const sendMessage = (message) => {
     if (socket && socket.readyState === WebSocket.OPEN) {
       socket.send(message);
+    } else {
+      console.error("Error connecting to server");
     }
   };
 
   return (
     <WebsocketContext.Provider
-      value={{ sendMessage, socket, messages }}
+      value={{ sendMessage, connectWebsocket, socket, messages }}
       {...props}
     />
   );
@@ -54,6 +58,7 @@ const useWebsocketConnection = () => {
       "useWebsocketConnection must be used within a WebsocketProvider"
     );
   }
+  return context;
 };
 
 export { WebsocketProvider, useWebsocketConnection };

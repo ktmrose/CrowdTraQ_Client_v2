@@ -12,6 +12,7 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "clientjs": "^0.2.1",
     "font-awesome": "^4.7.0",
     "react": "^17.0.2",
     "react-cookie": "^7.2.2",

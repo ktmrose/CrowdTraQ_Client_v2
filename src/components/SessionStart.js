@@ -1,21 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import "./SessionStart.css";
-import { Cookies } from "react-cookie";
+import { useWebsocketConnection } from "../context/websocket";
 
+//decomissioned with revised architecture. Revivable if server can handle more than one session
 const SessionStart = (props) => {
-  const cookies = new Cookies();
+  const { connectWebsocket } = useWebsocketConnection();
   const { register, handleSubmit } = useForm();
 
   const onFormSubmit = (data) => {
-    //connect with server, if successful, set cookie
-
-    cookies.set("CTQ_TOKEN", data?.roomCode, {
-      path: "/",
-      secure: true,
-      httpOnly: false,
-      sameSite: "Strict",
-    });
+    connectWebsocket(data?.roomCode);
     props.setAccessToken(data?.roomCode);
   };
 
