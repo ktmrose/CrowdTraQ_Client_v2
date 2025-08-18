@@ -8,20 +8,14 @@ import { useWebsocketConnection } from "../context/websocket";
 const Dashboard = (props) => {
   //props.accessToken to make requests to server
   const [tokens, setTokens] = useState(0); //TODO: set from server
-  const [currentSong, setCurrentSong] = useState(""); //TODO: set from server
   const [currentArtist, setCurrentArtist] = useState(""); //TODO: set from server
   const [providedReaction, setProvidedReaction] = useState(false);
   const [isAddingSong, setIsAddingSong] = useState(false);
-  const { sendMessage } = useWebsocketConnection();
+  const { sendMessage, currentSongData } = useWebsocketConnection();
 
   useEffect(() => {
-    //TODO get data from server
-
-    //test data
-    setTokens(12);
-    setCurrentSong("{Current Song");
-    setCurrentArtist("{Current Artist}");
-  }, [props]);
+    setTokens(12); // Example token value, replace with actual logic
+  }, [currentSongData]);
 
   //TODO: addTokens upon Websocket state push.
   const addSong = () => {
@@ -57,8 +51,18 @@ const Dashboard = (props) => {
           ) : (
             <>
               <h1>
-                How do you like {currentSong} by {currentArtist} ?
+                How do you like {currentSongData?.track_name} by{" "}
+                {currentSongData?.artists?.map((artist, index) => (
+                  <span key={index}>{`${artist}${
+                    index < currentSongData?.artists?.length - 1 && ", "
+                  }`}</span>
+                ))}{" "}
+                ?
               </h1>
+              <img
+                src={currentSongData?.album_art}
+                alt={`${currentSongData?.album} album cover`}
+              />
               <div className="icon-container">
                 <FontAwesomeIcon
                   className="reaction-icon"
@@ -70,10 +74,6 @@ const Dashboard = (props) => {
                   icon={faBan}
                   onClick={() => sendNotReaction()}
                 />
-                {/* <div className="icon-text">
-                            <span>HOT!</span>
-                            <span>NOT!</span>
-                        </div> */}
               </div>
             </>
           )}

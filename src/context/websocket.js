@@ -5,6 +5,7 @@ const WebsocketContext = createContext({});
 const WebsocketProvider = (props) => {
   const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [currentSongData, setCurrentSongData] = useState(null);
 
   const connectWebsocket = () => {
     const ws = new WebSocket("ws://localhost:7890");
@@ -14,8 +15,18 @@ const WebsocketProvider = (props) => {
     };
 
     ws.onmessage = (event) => {
-      console.log("Message from server:", event.data);
-      setMessages((prevMessages) => [...prevMessages, event.data]);
+      try {
+        const data = JSON.parse(event.data);
+        if (data.currently_playing) {
+          setCurrentSongData(data.currently_playing);
+        }
+        // Store all messages for debugging or other uses
+        setMessages((prevMessages) => [...prevMessages, data]);
+      } catch (err) {
+        // Fallback for non-JSON messages
+        setMessages((prevMessages) => [...prevMessages, event.data]);
+        console.log("Raw message from server:", event.data);
+      }
     };
 
     ws.onclose = () => {
@@ -45,7 +56,13 @@ const WebsocketProvider = (props) => {
 
   return (
     <WebsocketContext.Provider
-      value={{ sendMessage, connectWebsocket, socket, messages }}
+      value={{
+        sendMessage,
+        connectWebsocket,
+        socket,
+        messages,
+        currentSongData,
+      }}
       {...props}
     />
   );
