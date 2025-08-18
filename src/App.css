@@ -1,36 +1,13 @@
+html,
 .App {
-  text-align: center;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   background-color: #010101;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: #fbff00;
-}
-
-.App-logo {
-  width: 90%;
-  padding: 10px;
-  margin-top: 10px;
-  position: fixed;
-  top: 0px;
-  max-height: 100px;
-}
-
-.background-img {
-  background-image: url("./CD_Reflection_background.png");
-  background-position: 85%;
-  background-repeat: no-repeat;
 }
 
 .icon {
   height: 2.5em;
-  bottom: 0;
-  margin-bottom: 10px;
-  position: absolute;
 }
 
 .intro-img {

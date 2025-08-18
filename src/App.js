@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "react-modal";
 import img from "./CrowdTraQIntro.png";
 import { useWebsocketConnection } from "./context/websocket";
+import { Row, Col } from "react-bootstrap";
 
 function App() {
   const [showHelpModal, setShowHelpModal] = useState(false);
@@ -27,8 +28,8 @@ function App() {
   };
 
   return (
-    <>
-      <Modal isOpen={showHelpModal} className="modal-body">
+    <div className="App p-2">
+      <Modal isOpen={showHelpModal} className="modal-body p-2">
         <FontAwesomeIcon
           className="close-icon"
           icon={faXmark}
@@ -96,16 +97,22 @@ function App() {
           - Project architecture, UI/UX design
         </p>
       </Modal>
-      <div className="App background-img">
-        <img src={logo} className="App-logo" alt="CrowdTraQ logo" />
-        {socket && <Dashboard />}
-        <FontAwesomeIcon
-          className="icon"
-          icon={faCircleQuestion}
-          onClick={() => toggleHelpModal()}
-        />
-      </div>
-    </>
+      <Row className="justify-content-center">
+        <Col xs={"auto"}>
+          <img src={logo} alt="CrowdTraQ logo" className="img-fluid" />
+        </Col>
+      </Row>
+      <Row className="justify-content-center">
+        <Col xs={12} className="text-center">
+          {socket && <Dashboard />}
+          <FontAwesomeIcon
+            className="icon mt-3"
+            icon={faCircleQuestion}
+            onClick={() => toggleHelpModal()}
+          />
+        </Col>
+      </Row>
+    </div>
   );
 }
 
