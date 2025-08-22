@@ -9,9 +9,9 @@
 
 .animated-bg {
   @include animated-gradient(
-    $color-shadow,
-    $color-strong,
-    $color-cta,
-    $color-accent
+    $color-bg-green,
+    $color-bg-blue,
+    $color-bg-pink,
+    $color-bg-orange
   );
 }
