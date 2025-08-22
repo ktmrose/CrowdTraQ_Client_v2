@@ -1,10 +1,17 @@
 // _components.scss
 .btn-cta {
-  background-color: transparent;
+  background-color: #1271bb;
   font-family: $font-secondary;
   font-size: 2rem;
   border-radius: 1rem;
-  @include vapor-glow($color-border, #ff00cc);
+  @include gradient-text($color-accent, $color-text);
+  @include vapor-glow($color-strong, $color-shadow);
+}
+
+.help-icon {
+  cursor: pointer;
+  font-size: 2.5rem;
+  @include gradient-text($color-accent, $color-text);
 }
 
 .vapor-input {
@@ -17,7 +24,7 @@
   background: $gradient-input;
   border: 2px solid $color-border;
   border-radius: 8px;
-  @include vapor-glow($color-border, #ff00cc);
+  @include vapor-glow($color-strong, $color-shadow);
   outline: none;
   transition: all 0.3s ease;
 

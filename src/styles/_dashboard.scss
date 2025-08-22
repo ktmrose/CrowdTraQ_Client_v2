@@ -2,10 +2,8 @@
 @use "mixins";
 
 .reaction-icon {
-  @include gradient-text($color-shadow, $color-text);
+  background-color: $color-bg;
+  cursor: pointer;
+  @include gradient-text($fire-red, $fire-yellow);
   @include responsive-font(5rem, 8rem, 10rem);
-}
-
-#head span {
-  padding: 30px;
 }

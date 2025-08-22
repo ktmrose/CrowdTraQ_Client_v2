@@ -4,20 +4,29 @@ $font-secondary: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
   "Lucida Sans", Arial, sans-serif;
 
 $color-bg: #010101;
-$color-text: #fbff00;
-$color-accent: #00ffff;
+$color-text: #b9ffff;
+$color-accent: #02c8ed;
 $color-cta: #3de526;
-$color-strong: #0067ff;
-$color-shadow: #ce2857;
+$color-strong: #ce1d4b;
+$color-shadow: #66205a;
 $color-border: #00f0ff;
-$color-focus: #fffb00;
+$color-focus: #fbff00;
 
-//background gradient
-$color-bg-green: #98ffba;
-$color-bg-blue: #a4dfff;
-$color-bg-purple: #895fc9;
-$color-bg-pink: #e9cdf0;
-$color-bg-orange: #fdede4;
+$fire-red: #ce2857;
+$fire-yellow: #fbff00;
+
+//background gradient - light theme
+$light-bg-green: #98ffba;
+$light-bg-blue: #a4dfff;
+$light-bg-purple: #895fc9;
+$light-bg-pink: #e9cdf0;
+$light-bg-orange: #fdede4;
+
+//background gradient - dark theme
+$dark-bg-black: #141530;
+$dark-bg-blue: #153366;
+$dark-bg-magenta: #66205a;
+$dark-bg-grey: #3d4050;
 
 $gradient-input: linear-gradient(135deg, #ff00cc, #3333ff);
 $gradient-focus: linear-gradient(135deg, #3333ff, #ff00cc);

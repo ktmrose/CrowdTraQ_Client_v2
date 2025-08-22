@@ -2,7 +2,7 @@
 
 // Neon glow for any element
 @mixin vapor-glow($color1, $color2) {
-  box-shadow: 0 0 12px $color1, 0 0 24px $color2, 0 0 36px $color2;
+  box-shadow: 0 0 24px $color1, 0 0 36px $color2, 0 0 48px $color2;
 }
 
 // Gradient text effect

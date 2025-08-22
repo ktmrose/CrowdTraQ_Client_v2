@@ -2,8 +2,9 @@ import logo from "./logo.svg";
 import React, { useState, useEffect } from "react";
 import "./styles/main.scss";
 import Dashboard from "./components/Dashboard";
-import { faCircleQuestion, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import Modal from "react-modal";
 import img from "./CrowdTraQIntro.png";
 import { useWebsocketConnection } from "./context/websocket";
@@ -28,7 +29,7 @@ function App() {
   };
 
   return (
-    <Container className="App p-2 animated-bg">
+    <Container className="App p-3 animated-bg">
       <Modal isOpen={showHelpModal} className="modal-body p-2">
         <FontAwesomeIcon
           className="close-icon"
@@ -99,14 +100,14 @@ function App() {
       </Modal>
       <Row className="justify-content-center">
         <Col xs={"auto"}>
-          <img src={logo} alt="CrowdTraQ logo" className="img-fluid" />
+          <img src={logo} alt="CrowdTraQ logo" className="p-2 px-4" />
         </Col>
       </Row>
       <Row className="justify-content-center">
         <Col xs={12} className="text-center">
           {socket && <Dashboard />}
-          <FontAwesomeIcon
-            className="icon mt-5"
+          <i
+            className="fas fa-circle-question help-icon mt-4"
             transform="grow-50"
             icon={faCircleQuestion}
             onClick={() => toggleHelpModal()}

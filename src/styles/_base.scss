@@ -45,7 +45,11 @@ h6 {
   font-family: $font-primary;
   text-transform: uppercase;
   letter-spacing: 2px;
-  @include gradient-text($color-strong, $color-shadow);
+  @include gradient-text($color-accent, $color-text);
+  //   @include vapor-glow($color-strong, $color-shadow);
+}
+
+img {
   @include vapor-glow($color-strong, $color-shadow);
 }
 
