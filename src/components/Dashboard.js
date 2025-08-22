@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./Dashboard.css";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AddSong from "./AddSong";
@@ -42,13 +41,13 @@ const Dashboard = (props) => {
   return (
     <Row className="align-items-center justify-content-center text-center">
       <Col className="text-center">
-        <h4>Tokens: {tokens}</h4>
+        <h4 className="my-4 py-2">Tokens: {tokens}</h4>
         {isAddingSong ? (
           <AddSong toDashBoard={returnToDashCallback} />
         ) : (
           <Row>
             <Col xs={12}>
-              <h1>
+              <h1 className="my-3 my-sm-4">
                 "{currentSongData?.track_name}" by{" "}
                 {currentSongData?.artists?.map((artist, index) => (
                   <span key={index}>{`${artist}${
@@ -61,7 +60,6 @@ const Dashboard = (props) => {
               xs={12}
               sm={{ span: 8, offset: 2 }}
               md={{ span: 6, offset: 3 }}
-              lg={{ span: 4, offset: 4 }}
               className="text-center"
             >
               <img
@@ -90,7 +88,11 @@ const Dashboard = (props) => {
               )}
               <Row>
                 <Col xs={12} className="text-center mt-3">
-                  <button onClick={() => addSong()}>
+                  <button
+                    onClick={() => addSong()}
+                    aria-label="Add Song"
+                    className="btn-cta p-3 border border-rounded border-dark w-100"
+                  >
                     <FontAwesomeIcon icon={faPlus} /> Add Song
                   </button>
                 </Col>

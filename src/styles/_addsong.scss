@@ -1,0 +1,60 @@
+@use "variables";
+@use "mixins";
+
+.modal-body {
+  text-align: center;
+  padding: 30px;
+  height: 80%;
+  margin: 1em;
+  font-family: $font-secondary;
+  background-color: $color-bg;
+  color: $color-accent;
+  overflow-y: scroll;
+  border-radius: 8px;
+  @include neon-border($color-accent);
+}
+
+.close-icon {
+  float: right;
+  text-align: right;
+  color: lighten($color-text, 30%);
+  height: 2.5em;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    @include vapor-glow($color-accent, $color-shadow);
+  }
+}
+
+.width-wrapper {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.custom-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-family: $font-primary;
+  color: #fff;
+  background: $gradient-input;
+  border: 2px solid $color-border;
+  border-radius: 8px;
+  @include vapor-glow($color-border, #ff00cc);
+  outline: none;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: #e0e0ff;
+    opacity: 0.7;
+  }
+
+  &:focus {
+    border-color: $color-focus;
+    background: $gradient-focus;
+    @include vapor-glow($color-focus, #ff00cc);
+  }
+}

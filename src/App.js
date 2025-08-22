@@ -1,13 +1,13 @@
 import logo from "./logo.svg";
 import React, { useState, useEffect } from "react";
-import "./App.css";
+import "./styles/main.scss";
 import Dashboard from "./components/Dashboard";
 import { faCircleQuestion, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "react-modal";
 import img from "./CrowdTraQIntro.png";
 import { useWebsocketConnection } from "./context/websocket";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 
 function App() {
   const [showHelpModal, setShowHelpModal] = useState(false);
@@ -28,7 +28,7 @@ function App() {
   };
 
   return (
-    <div className="App p-2">
+    <Container className="App p-2">
       <Modal isOpen={showHelpModal} className="modal-body p-2">
         <FontAwesomeIcon
           className="close-icon"
@@ -106,13 +106,14 @@ function App() {
         <Col xs={12} className="text-center">
           {socket && <Dashboard />}
           <FontAwesomeIcon
-            className="icon mt-3"
+            className="icon mt-5"
+            transform="grow-50"
             icon={faCircleQuestion}
             onClick={() => toggleHelpModal()}
           />
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 }
 

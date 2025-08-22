@@ -1,0 +1,58 @@
+@use "variables";
+@use "mixins";
+
+/* Box-sizing reset */
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Global body styles */
+body {
+  margin: 0;
+  font-family: $font-primary;
+  background: linear-gradient(135deg, $color-bg 0%, #1a0033 100%);
+  color: $color-text;
+  line-height: 1.6;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+/* Links */
+a {
+  color: $color-strong;
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+
+  &:hover {
+    color: $color-accent;
+    @include vapor-glow($color-accent, $color-strong);
+  }
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-primary;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  @include gradient-text($color-strong, $color-shadow);
+  @include vapor-glow($color-strong, $color-shadow);
+}
+
+/* App wrapper */
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

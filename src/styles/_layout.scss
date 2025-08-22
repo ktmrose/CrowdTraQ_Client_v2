@@ -1,0 +1,53 @@
+@use "variables";
+@use "mixins";
+
+/* Main container */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Flex utilities */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Grid utilities */
+.grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+/* Section wrappers with neon borders and glow */
+.section {
+  padding: 2rem;
+  border-radius: 8px;
+  background: rgba(13, 13, 13, 0.8);
+  @include neon-border($color-strong);
+  @include scanlines();
+}
+
+/* Sticky header */
+.header {
+  position: sticky;
+  top: 0;
+  background: rgba(13, 13, 13, 0.95);
+  padding: 1rem 2rem;
+  border-bottom: 2px solid $color-accent;
+  @include vapor-glow($color-accent, $color-strong);
+  z-index: 1000;
+}
+
+/* Footer */
+.footer {
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: $color-text;
+  border-top: 2px solid $color-strong;
+  @include vapor-glow($color-strong, $color-shadow);
+}

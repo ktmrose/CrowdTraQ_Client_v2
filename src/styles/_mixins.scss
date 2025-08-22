@@ -1,0 +1,94 @@
+// _mixins.scss
+
+// Neon glow for any element
+@mixin vapor-glow($color1, $color2) {
+  box-shadow: 0 0 12px $color1, 0 0 24px $color2, 0 0 36px $color2;
+}
+
+// Gradient text effect
+@mixin gradient-text($from, $to) {
+  background: linear-gradient(90deg, $from, $to);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+// Responsive font sizing
+@mixin responsive-font($base, $md, $lg) {
+  font-size: $base;
+  @media (min-width: 768px) {
+    font-size: $md;
+  }
+  @media (min-width: 1200px) {
+    font-size: $lg;
+  }
+}
+
+// Animated gradient background
+@mixin animated-gradient($colors...) {
+  background: linear-gradient(270deg, $colors);
+  background-size: 600% 600%;
+  animation: gradientShift 8s ease infinite;
+
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+
+// Retro scanline overlay
+@mixin scanlines($color: rgba(255, 255, 255, 0.05)) {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 2px,
+      $color 3px
+    );
+    pointer-events: none;
+  }
+}
+
+// Neon border
+@mixin neon-border($color) {
+  border: 2px solid $color;
+  box-shadow: 0 0 5px $color, 0 0 10px $color, 0 0 20px $color;
+}
+
+// Flicker animation for lights
+@mixin flicker($color) {
+  animation: flickerAnim 2s infinite;
+  @keyframes flickerAnim {
+    0%,
+    19%,
+    21%,
+    23%,
+    25%,
+    54%,
+    56%,
+    100% {
+      text-shadow: 0 0 4px $color, 0 0 11px $color, 0 0 19px $color;
+      opacity: 1;
+    }
+    20%,
+    24%,
+    55% {
+      opacity: 0.4;
+    }
+  }
+}

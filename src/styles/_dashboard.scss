@@ -1,0 +1,11 @@
+@use "variables";
+@use "mixins";
+
+.reaction-icon {
+  @include gradient-text($color-shadow, $color-text);
+  @include responsive-font(5rem, 8rem, 10rem);
+}
+
+#head span {
+  padding: 30px;
+}
