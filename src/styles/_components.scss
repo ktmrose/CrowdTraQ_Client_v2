@@ -1,14 +1,13 @@
 // _components.scss
 .btn-cta {
-  background-color: $color-cta;
+  background-color: transparent;
   font-family: $font-secondary;
   font-size: 2rem;
   border-radius: 1rem;
-  font-weight: bolder;
-  cursor: pointer;
+  @include vapor-glow($color-border, #ff00cc);
 }
 
-.custom-input {
+.vapor-input {
   width: 100%;
   max-width: 400px;
   padding: 0.75rem 1rem;

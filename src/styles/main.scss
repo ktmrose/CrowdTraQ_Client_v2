@@ -6,3 +6,12 @@
 @import "components";
 @import "dashboard";
 @import "addsong";
+
+.animated-bg {
+  @include animated-gradient(
+    $color-shadow,
+    $color-strong,
+    $color-cta,
+    $color-accent
+  );
+}

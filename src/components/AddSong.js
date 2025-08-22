@@ -51,12 +51,12 @@ const AddSong = (props) => {
           pattern="^[a-zA-Z0-9]+$"
           required
           title="Numbers and letters only"
-          className="width-wrapper mx-auto custom-input"
+          className="width-wrapper mx-auto vapor-input"
         />
         <div className="d-flex flex-column align-items-stretch width-wrapper mx-auto">
-          <button className="btn-cta px-5 py-1 my-5">Submit</button>
+          <button className="btn-cta p-3 my-5 fw-bold">Submit</button>
           <button
-            className="btn-cta px-5 py-1 my-2"
+            className="btn-cta p-3 my-2 fw-bold"
             onClick={() => props.toDashBoard()}
           >
             Back to Dashboard

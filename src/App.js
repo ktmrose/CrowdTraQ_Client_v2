@@ -28,7 +28,7 @@ function App() {
   };
 
   return (
-    <Container className="App p-2">
+    <Container className="App p-2 animated-bg">
       <Modal isOpen={showHelpModal} className="modal-body p-2">
         <FontAwesomeIcon
           className="close-icon"
@@ -77,7 +77,7 @@ function App() {
           <br></br>
           Trolls, beware! If the majority of people hate a song that you had
           queued up so much they hit the dislike button, that song ends (even
-          before it officially does) and you don't get those tokens back.{" "}
+          before it officially does) and you don't even get a refund.{" "}
           <span role="img" aria-label="bawling">
             😭
           </span>

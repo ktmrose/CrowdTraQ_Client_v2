@@ -41,13 +41,13 @@ const Dashboard = (props) => {
   return (
     <Row className="align-items-center justify-content-center text-center">
       <Col className="text-center">
-        <h4 className="my-4 py-2">Tokens: {tokens}</h4>
+        <h4 className="my-4 py-2 fw-bold">Tokens: {tokens}</h4>
         {isAddingSong ? (
           <AddSong toDashBoard={returnToDashCallback} />
         ) : (
           <Row>
             <Col xs={12}>
-              <h1 className="my-3 my-sm-4">
+              <h1 className="my-3 my-sm-4 fw-bold">
                 "{currentSongData?.track_name}" by{" "}
                 {currentSongData?.artists?.map((artist, index) => (
                   <span key={index}>{`${artist}${
@@ -91,7 +91,7 @@ const Dashboard = (props) => {
                   <button
                     onClick={() => addSong()}
                     aria-label="Add Song"
-                    className="btn-cta p-3 border border-rounded border-dark w-100"
+                    className="btn-cta p-3 border border-rounded border-dark w-100 fw-bold"
                   >
                     <FontAwesomeIcon icon={faPlus} /> Add Song
                   </button>

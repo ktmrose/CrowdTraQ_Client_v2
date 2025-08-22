@@ -7,11 +7,15 @@
 
 // Gradient text effect
 @mixin gradient-text($from, $to) {
-  background: linear-gradient(90deg, $from, $to);
+  background: linear-gradient(180deg, $from, $to);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+
+  // Ensure both layers are fully sized
+  background-size: auto, 100% 100%;
+  background-repeat: no-repeat, no-repeat;
 }
 
 // Responsive font sizing
