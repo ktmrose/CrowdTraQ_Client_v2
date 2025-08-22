@@ -1,18 +1,16 @@
-.icon-container {
-  color: #ce2857;
-  /* TODO: figure out how to make color a linear gradient */
-}
-
 .reaction-icon {
-  padding: 10px;
-  height: 8em;
-  vertical-align: top;
-  /* TODO: add breakpoints for icon spacing */
-}
-
-.icon-text {
-  padding: 30px;
-  display: flex;
+  background: linear-gradient(#ce2857, #fbff00);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  font-size: 5rem;
+  @media (min-width: 768px) {
+    font-size: 8rem;
+  }
+  @media (min-width: 1200px) {
+    font-size: 10rem;
+  }
 }
 
 #head span {

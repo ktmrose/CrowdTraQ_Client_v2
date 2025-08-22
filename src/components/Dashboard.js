@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
-import { faFire, faBan, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AddSong from "./AddSong";
 import { useWebsocketConnection } from "../context/websocket";
@@ -47,7 +47,7 @@ const Dashboard = (props) => {
           <AddSong toDashBoard={returnToDashCallback} />
         ) : (
           <Row>
-            <Col>
+            <Col xs={12}>
               <h1>
                 "{currentSongData?.track_name}" by{" "}
                 {currentSongData?.artists?.map((artist, index) => (
@@ -57,33 +57,45 @@ const Dashboard = (props) => {
                 ))}
               </h1>
             </Col>
-            <img
-              src={currentSongData?.album_art}
-              alt={`${currentSongData?.album} album cover`}
-            />
-            {providedReaction ? (
-              <h1 className="m-3">Thanks for your feedback!</h1>
-            ) : (
-              <>
-                <div className="icon-container">
-                  <FontAwesomeIcon
-                    className="reaction-icon"
-                    icon={faFire}
-                    onClick={() => sendFireReaction()}
-                  />
-                  <FontAwesomeIcon
-                    className="reaction-icon"
-                    icon={faBan}
-                    onClick={() => sendNotReaction()}
-                  />
-                </div>
-              </>
-            )}
-            <div className="btn-container">
-              <button onClick={() => addSong()}>
-                <FontAwesomeIcon icon={faPlus} /> Add Song
-              </button>
-            </div>
+            <Col
+              xs={12}
+              sm={{ span: 8, offset: 2 }}
+              md={{ span: 6, offset: 3 }}
+              lg={{ span: 4, offset: 4 }}
+              className="text-center"
+            >
+              <img
+                src={currentSongData?.album_art}
+                alt={`${currentSongData?.album} album cover`}
+                className="w-100"
+              />
+
+              {providedReaction ? (
+                <h1 className="m-3">Thanks for your feedback!</h1>
+              ) : (
+                <Row className="m-3 mt-4">
+                  <Col xs={6} className="text-center">
+                    <i
+                      className="fas fa-fire reaction-icon mx-auto"
+                      onClick={() => sendFireReaction()}
+                    />
+                  </Col>
+                  <Col xs={6} className="text-center">
+                    <i
+                      className="fas fa-ban reaction-icon"
+                      onClick={() => sendNotReaction()}
+                    />
+                  </Col>
+                </Row>
+              )}
+              <Row>
+                <Col xs={12} className="text-center mt-3">
+                  <button onClick={() => addSong()}>
+                    <FontAwesomeIcon icon={faPlus} /> Add Song
+                  </button>
+                </Col>
+              </Row>
+            </Col>
           </Row>
         )}
       </Col>
