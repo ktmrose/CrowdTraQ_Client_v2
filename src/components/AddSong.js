@@ -8,7 +8,8 @@ import { useWebsocketConnection } from "../context/websocket";
 const AddSong = (props) => {
   const { register, handleSubmit, watch } = useForm();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const songId = watch("add-song");
+  const songName = watch("search-song");
+
   const { sendMessage } = useWebsocketConnection();
 
   const onFormSubmit = (data) => {
@@ -20,9 +21,9 @@ const AddSong = (props) => {
     setShowConfirmModal(false);
   };
 
-  const sendRequest = () => {
-    console.log(songId);
-    sendMessage(songId);
+  const sendRequest = (payload) => {
+    console.log(payload);
+    sendMessage(payload);
   };
 
   return (
@@ -33,8 +34,15 @@ const AddSong = (props) => {
           icon={faXmark}
           onClick={() => handleModalCancel()}
         ></FontAwesomeIcon>
-        <h1>Push {songId} to queue?</h1>
-        <button onClick={() => sendRequest()}>
+        <h1>Push {"Change me to selected song"} to queue?</h1>
+        <button
+          onClick={() =>
+            sendRequest({
+              action: "add_track",
+              data: "change me to selected song id",
+            })
+          }
+        >
           Yes! People need to hear this!
         </button>
         <button onClick={() => handleModalCancel()}>
@@ -43,10 +51,10 @@ const AddSong = (props) => {
       </Modal>
 
       <form onSubmit={handleSubmit(onFormSubmit)}>
-        <h1>Add song by track ID:</h1>
+        <h1 className="mb-4">Search for track:</h1>
         <input
           type="text"
-          name="add-song"
+          name="search-song"
           {...register("add-song")}
           pattern="^[a-zA-Z0-9]+$"
           required
@@ -54,7 +62,7 @@ const AddSong = (props) => {
           className="width-wrapper mx-auto vapor-input"
         />
         <div className="d-flex flex-column align-items-stretch width-wrapper mx-auto">
-          <button className="btn-cta p-3 my-5 fw-bold">Submit</button>
+          <button className="btn-cta p-3 my-5 fw-bold">Find Track</button>
           <button
             className="btn-cta p-3 my-2 fw-bold"
             onClick={() => props.toDashBoard()}

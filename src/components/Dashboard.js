@@ -89,7 +89,7 @@ const Dashboard = (props) => {
                   <button
                     onClick={() => addSong()}
                     aria-label="Add Song"
-                    className="btn-cta p-3 border border-rounded border-dark w-100 fw-bold"
+                    className="btn-cta p-3 w-100 fw-bold"
                   >
                     <i className="fas fa-plus" /> Add Song
                   </button>
