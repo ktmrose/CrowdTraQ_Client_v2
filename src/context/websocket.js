@@ -6,6 +6,7 @@ const WebsocketProvider = (props) => {
   const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
   const [currentSongData, setCurrentSongData] = useState(null);
+  const [searchData, setSearchData] = useState(null);
 
   const connectWebsocket = () => {
     const ws = new WebSocket("ws://localhost:7890");
@@ -17,15 +18,18 @@ const WebsocketProvider = (props) => {
     ws.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        if (data.currently_playing) {
+        if (data?.currently_playing) {
           setCurrentSongData(data.currently_playing);
+        } else if (data?.search_data) {
+          setSearchData(data);
         }
-        // Store all messages for debugging or other uses
-        setMessages((prevMessages) => [...prevMessages, data]);
+        setMessages((prevMessages) => {
+          const newMessages = [...prevMessages, data];
+          return newMessages.length > 10 ? newMessages.slice(-10) : newMessages; //limit server messages to last 10
+        });
       } catch (err) {
         // Fallback for non-JSON messages
-        setMessages((prevMessages) => [...prevMessages, event.data]);
-        console.log("Raw message from server:", event.data);
+        console.log("Raw, unprocessed message from server:", event.data);
       }
     };
 
@@ -48,7 +52,7 @@ const WebsocketProvider = (props) => {
 
   const sendMessage = (message) => {
     if (socket && socket.readyState === WebSocket.OPEN) {
-      socket.send(message);
+      socket.send(JSON.stringify(message));
     } else {
       console.error("Error connecting to server");
     }
@@ -62,6 +66,7 @@ const WebsocketProvider = (props) => {
         socket,
         messages,
         currentSongData,
+        searchData,
       }}
       {...props}
     />

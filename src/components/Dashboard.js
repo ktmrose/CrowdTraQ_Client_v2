@@ -16,7 +16,6 @@ const Dashboard = (props) => {
 
   //TODO: addTokens upon Websocket state push.
   const addSong = () => {
-    console.log("Add song button clicked");
     setIsAddingSong(true);
   };
 
