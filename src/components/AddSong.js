@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useWebsocketConnection } from "../context/websocket";
+import ConfirmSong from "./ConfirmSong";
 
 const AddSong = (props) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [mostRecentSearch, setMostRecentSearch] = useState([]);
-  const [songName, setSongName] = useState("");
+  const [selectedSong, setSelectedSong] = useState({});
 
   const { sendMessage, searchData, clearSearchData } = useWebsocketConnection();
 
@@ -18,18 +17,21 @@ const AddSong = (props) => {
       const sanitized = sanitizeInput(input);
       if (sanitized.length > 0) {
         sendMessage({ action: "search", data: { query: sanitized } });
-        setSongName(sanitized);
       }
     }
   };
 
   const handleModalCancel = () => {
+    setSelectedSong({});
     setShowConfirmModal(false);
   };
 
-  const sendRequest = (payload) => {
-    console.log(payload);
+  const submitSong = (track) => {
+    setShowConfirmModal(false);
+    const payload = { action: "add_track", data: { track_id: track.track_id } };
     sendMessage(payload);
+    clearSearchData();
+    props.toDashBoard();
   };
 
   useEffect(() => {
@@ -37,30 +39,19 @@ const AddSong = (props) => {
       setMostRecentSearch(searchData?.search_data);
   }, [searchData]);
 
+  const renderConfirmModal = (track) => {
+    setSelectedSong(track);
+    setShowConfirmModal(true);
+  };
+
   return (
     <div>
-      <Modal isOpen={showConfirmModal} className="modal-body">
-        <FontAwesomeIcon
-          className="close-icon"
-          icon={faXmark}
-          onClick={() => handleModalCancel()}
-        ></FontAwesomeIcon>
-        <h1>Push {"Change me to selected song"} to queue?</h1>
-        <button
-          onClick={() =>
-            sendRequest({
-              action: "add_track",
-              data: "change me to selected song id",
-            })
-          }
-        >
-          Yes! People need to hear this!
-        </button>
-        <button onClick={() => handleModalCancel()}>
-          Eh, nevermind. Go back
-        </button>
-      </Modal>
-
+      <ConfirmSong
+        isOpen={showConfirmModal}
+        onCancel={handleModalCancel}
+        onConfirm={submitSong}
+        selectedSong={selectedSong}
+      />
       <form>
         <h1 className="mb-4">Search for track:</h1>
         <input
@@ -76,11 +67,11 @@ const AddSong = (props) => {
         <div className="d-flex flex-column align-items-stretch width-wrapper mx-auto">
           {mostRecentSearch.length > 0 && (
             <div className="search-results mt-4">
-              <h4 className="mb-3">Search Results for "{songName}":</h4>
               {searchData?.search_data?.map((track, index) => (
                 <div
                   key={index}
                   className="search-result-item mb-3 p-2 align-items-center text-start ps-3 clickable btn-cta my-4 d-flex"
+                  onClick={() => renderConfirmModal(track)}
                 >
                   <img
                     src={track.album_art}
