@@ -8,6 +8,8 @@ const WebsocketProvider = (props) => {
   const [currentSongData, setCurrentSongData] = useState(null);
   const [searchData, setSearchData] = useState(null);
 
+  const clearSearchData = () => setSearchData(null);
+
   const connectWebsocket = () => {
     const ws = new WebSocket("ws://localhost:7890");
 
@@ -67,6 +69,7 @@ const WebsocketProvider = (props) => {
         messages,
         currentSongData,
         searchData,
+        clearSearchData,
       }}
       {...props}
     />

@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import Modal from "react-modal";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useWebsocketConnection } from "../context/websocket";
 
 const AddSong = (props) => {
-  const { register, handleSubmit, watch } = useForm();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [mostRecentSearch, setMostRecentSearch] = useState([]);
-  const songName = watch("search_song");
+  const [songName, setSongName] = useState("");
 
-  const { sendMessage, searchData } = useWebsocketConnection();
+  const { sendMessage, searchData, clearSearchData } = useWebsocketConnection();
 
-  const onFormSubmit = (data) => {
-    sendMessage({ action: "search", data: { query: data?.search_song } });
+  const sanitizeInput = (value) => value.replace(/[^a-zA-Z0-9 ]/g, "");
+
+  const handleSearchChange = (input) => {
+    if (input) {
+      const sanitized = sanitizeInput(input);
+      if (sanitized.length > 0) {
+        sendMessage({ action: "search", data: { query: sanitized } });
+        setSongName(sanitized);
+      }
+    }
   };
 
   const handleModalCancel = () => {
@@ -31,7 +37,6 @@ const AddSong = (props) => {
       setMostRecentSearch(searchData?.search_data);
   }, [searchData]);
 
-  console.log("Most recent search:", mostRecentSearch);
   return (
     <div>
       <Modal isOpen={showConfirmModal} className="modal-body">
@@ -56,16 +61,16 @@ const AddSong = (props) => {
         </button>
       </Modal>
 
-      <form onSubmit={handleSubmit(onFormSubmit)}>
+      <form>
         <h1 className="mb-4">Search for track:</h1>
         <input
           type="text"
           name="search-song"
-          {...register("search_song")}
           pattern="^[a-zA-Z0-9]+$"
           required
           title="Numbers and letters only"
           className="width-wrapper mx-auto vapor-input"
+          onChange={(e) => handleSearchChange(e.target.value)}
         />
 
         <div className="d-flex flex-column align-items-stretch width-wrapper mx-auto">
@@ -75,7 +80,7 @@ const AddSong = (props) => {
               {searchData?.search_data?.map((track, index) => (
                 <div
                   key={index}
-                  className="search-result-item mb-3 p-2 align-items-center text-start ps-3 clickable btn-cta my-4"
+                  className="search-result-item mb-3 p-2 align-items-center text-start ps-3 clickable btn-cta my-4 d-flex"
                 >
                   <img
                     src={track.album_art}
@@ -90,13 +95,13 @@ const AddSong = (props) => {
               ))}
             </div>
           )}
-          <button className="btn-cta p-3 my-5 fw-bold" type="submit">
-            Find Track
-          </button>
           <button
             type="button"
-            className="btn-cta p-3 my-2 fw-bold"
-            onClick={() => props.toDashBoard()}
+            className="btn-cta p-3 my-2 fw-bold mt-5"
+            onClick={() => {
+              clearSearchData();
+              props.toDashBoard();
+            }}
           >
             Back to Dashboard
           </button>
