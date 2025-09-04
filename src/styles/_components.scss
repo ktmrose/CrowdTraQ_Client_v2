@@ -39,3 +39,72 @@
     @include vapor-glow($color-focus, #ff00cc);
   }
 }
+
+// Nightclub Vaporwave Slider Styling
+.song-progress-wrapper {
+  label {
+    color: #ff6ec7;
+    font-family: "Orbitron", "Montserrat", sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px #8f5cff, 0 0 2px #fff;
+  }
+  input[type="range"] {
+    -webkit-appearance: none;
+    height: 10px;
+    background: linear-gradient(90deg, #8f5cff 0%, #ff6ec7 100%);
+    border-radius: 5px;
+    box-shadow: 0 0 10px #ff6ec7, 0 0 20px #8f5cff;
+    outline: none;
+    transition: background 0.3s;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ff6ec7 60%, #8f5cff 100%);
+    box-shadow: 0 0 10px #ff6ec7, 0 0 20px #8f5cff;
+    border: 2px solid #fff;
+    transform: translateY(-5px);
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ff6ec7 60%, #8f5cff 100%);
+    box-shadow: 0 0 10px #ff6ec7, 0 0 20px #8f5cff;
+    border: 2px solid #fff;
+    transform: translateY(-5px);
+  }
+  input[type="range"]::-ms-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ff6ec7 60%, #8f5cff 100%);
+    box-shadow: 0 0 10px #ff6ec7, 0 0 20px #8f5cff;
+    border: 2px solid #fff;
+    transform: translateY(-5px);
+  }
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 10px;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #8f5cff 0%, #ff6ec7 100%);
+  }
+  input[type="range"]::-ms-fill-lower {
+    background: #8f5cff;
+  }
+  input[type="range"]::-ms-fill-upper {
+    background: #ff6ec7;
+  }
+  span {
+    color: #fff;
+    font-family: "Orbitron", "Montserrat", sans-serif;
+    font-size: 1rem;
+    text-shadow: 0 0 6px #ff6ec7, 0 0 2px #8f5cff;
+  }
+  background: rgba(34, 0, 51, 0.85);
+  border-radius: 12px;
+  box-shadow: 0 0 30px #8f5cff, 0 0 60px #ff6ec7;
+}

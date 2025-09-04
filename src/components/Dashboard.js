@@ -9,6 +9,34 @@ const Dashboard = (props) => {
   const [providedReaction, setProvidedReaction] = useState(false);
   const [isAddingSong, setIsAddingSong] = useState(false);
   const { sendMessage, currentSongData } = useWebsocketConnection();
+  const [sliderProgress, setSliderProgress] = useState(0);
+
+  // Set slider progress when song changes
+  useEffect(() => {
+    if (currentSongData && typeof currentSongData.progress_ms === "number") {
+      setSliderProgress(currentSongData.progress_ms);
+    }
+  }, [currentSongData]);
+
+  // Increment slider progress every second to mimic playback
+  useEffect(() => {
+    if (
+      !currentSongData ||
+      !currentSongData.duration_ms ||
+      sliderProgress >= currentSongData.duration_ms
+    )
+      return;
+    const interval = setInterval(() => {
+      setSliderProgress((prev) => {
+        if (prev + 1000 >= currentSongData.duration_ms) {
+          clearInterval(interval);
+          return currentSongData.duration_ms;
+        }
+        return prev + 1000;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [sliderProgress, currentSongData]);
 
   useEffect(() => {
     setTokens(12); // Example token value, replace with actual logic
@@ -60,6 +88,26 @@ const Dashboard = (props) => {
                 alt={`${currentSongData?.album} album cover`}
                 className="w-100"
               />
+              {currentSongData && currentSongData.duration_ms && (
+                <div className="song-progress-wrapper mt-4 p-3">
+                  <label htmlFor="song-progress">Song Progress</label>
+                  <input
+                    type="range"
+                    id="song-progress"
+                    min={0}
+                    max={currentSongData.duration_ms}
+                    value={sliderProgress}
+                    readOnly
+                    className="w-100 mt-3"
+                  />
+                  <div className="d-flex justify-content-between">
+                    <span>{Math.floor(sliderProgress / 1000)}s</span>
+                    <span>
+                      {Math.floor(currentSongData.duration_ms / 1000)}s
+                    </span>
+                  </div>
+                </div>
+              )}
 
               {providedReaction ? (
                 <h1 className="m-3">Thanks for your feedback!</h1>
