@@ -19,15 +19,11 @@ const Dashboard = (props) => {
     setIsAddingSong(true);
   };
 
-  const sendFireReaction = () => {
-    console.log("HOT!");
-    sendMessage(JSON.stringify({ isGoodSong: true }));
-    setProvidedReaction(true);
-  };
-
-  const sendNotReaction = () => {
-    console.log("NOT!");
-    sendMessage(JSON.stringify({ isGoodSong: false }));
+  const sendReaction = (likesTrack) => {
+    sendMessage({
+      action: `${likesTrack ? "like_track" : "dislike_track"}`,
+      data: {},
+    });
     setProvidedReaction(true);
   };
 
@@ -72,13 +68,13 @@ const Dashboard = (props) => {
                   <Col xs={6} className="text-center">
                     <i
                       className="fas fa-fire reaction-icon mx-auto"
-                      onClick={() => sendFireReaction()}
+                      onClick={() => sendReaction(true)}
                     />
                   </Col>
                   <Col xs={6} className="text-center">
                     <i
                       className="fas fa-ban reaction-icon"
-                      onClick={() => sendNotReaction()}
+                      onClick={() => sendReaction(false)}
                     />
                   </Col>
                 </Row>
