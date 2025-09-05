@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AddSong from "./AddSong";
 import { useWebsocketConnection } from "../context/websocket";
 import { Row, Col } from "react-bootstrap";
+import { formatTime } from "../common/config";
 
 const Dashboard = (props) => {
   //props.accessToken to make requests to server
@@ -20,15 +21,13 @@ const Dashboard = (props) => {
 
   // Increment slider progress every second to mimic playback
   useEffect(() => {
-    if (
-      !currentSongData ||
-      !currentSongData.duration_ms ||
-      sliderProgress >= currentSongData.duration_ms
-    )
-      return;
+    if (!currentSongData || !currentSongData.duration_ms) return;
     const interval = setInterval(() => {
       setSliderProgress((prev) => {
-        if (prev + 1000 >= currentSongData.duration_ms) {
+        if (prev + 1000 === currentSongData.duration_ms) {
+          console.log("Song ended, requesting refresh");
+          sendMessage({ action: "refresh", data: {} });
+        } else if (prev + 1000 > currentSongData.duration_ms) {
           clearInterval(interval);
           return currentSongData.duration_ms;
         }
@@ -36,7 +35,7 @@ const Dashboard = (props) => {
       });
     }, 1000);
     return () => clearInterval(interval);
-  }, [sliderProgress, currentSongData]);
+  }, [sliderProgress, currentSongData, sendMessage]);
 
   useEffect(() => {
     setTokens(12); // Example token value, replace with actual logic
@@ -101,9 +100,9 @@ const Dashboard = (props) => {
                     className="w-100 mt-3"
                   />
                   <div className="d-flex justify-content-between">
-                    <span>{Math.floor(sliderProgress / 1000)}s</span>
+                    <span>{formatTime(sliderProgress)}</span>
                     <span>
-                      {Math.floor(currentSongData.duration_ms / 1000)}s
+                      {formatTime(currentSongData.duration_ms - sliderProgress)}
                     </span>
                   </div>
                 </div>
