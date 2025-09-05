@@ -24,9 +24,10 @@ const Dashboard = (props) => {
     if (!currentSongData || !currentSongData.duration_ms) return;
     const interval = setInterval(() => {
       setSliderProgress((prev) => {
-        if (prev + 1000 === currentSongData.duration_ms) {
+        if (prev + 1000 >= currentSongData.duration_ms) {
           console.log("Song ended, requesting refresh");
           sendMessage({ action: "refresh", data: {} });
+          return;
         } else if (prev + 1000 > currentSongData.duration_ms) {
           clearInterval(interval);
           return currentSongData.duration_ms;
