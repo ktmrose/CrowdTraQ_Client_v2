@@ -12,6 +12,14 @@ const Dashboard = (props) => {
   const { sendMessage, currentSongData } = useWebsocketConnection();
   const [sliderProgress, setSliderProgress] = useState(0);
 
+  // Compute safe values for slider and duration
+  const safeSliderProgress = Number.isFinite(sliderProgress)
+    ? sliderProgress
+    : 0;
+  const songDuration = Number.isFinite(currentSongData?.duration_ms)
+    ? currentSongData.duration_ms
+    : 1;
+
   // Set slider progress when song changes
   useEffect(() => {
     if (currentSongData && typeof currentSongData.progress_ms === "number") {
@@ -25,7 +33,6 @@ const Dashboard = (props) => {
     const interval = setInterval(() => {
       setSliderProgress((prev) => {
         if (prev + 1000 >= currentSongData.duration_ms) {
-          console.log("Song ended, requesting refresh");
           sendMessage({ action: "refresh", data: {} });
           return;
         } else if (prev + 1000 > currentSongData.duration_ms) {
@@ -88,23 +95,21 @@ const Dashboard = (props) => {
                 alt={`${currentSongData?.album} album cover`}
                 className="w-100"
               />
-              {currentSongData && currentSongData.duration_ms && (
+              {currentSongData && songDuration && (
                 <div className="song-progress-wrapper mt-4 p-3">
                   <label htmlFor="song-progress">Song Progress</label>
                   <input
                     type="range"
                     id="song-progress"
                     min={0}
-                    max={currentSongData.duration_ms}
-                    value={sliderProgress}
+                    max={songDuration}
+                    value={safeSliderProgress}
                     readOnly
                     className="w-100 mt-3"
                   />
                   <div className="d-flex justify-content-between">
-                    <span>{formatTime(sliderProgress)}</span>
-                    <span>
-                      {formatTime(currentSongData.duration_ms - sliderProgress)}
-                    </span>
+                    <span>{formatTime(safeSliderProgress)}</span>
+                    <span>{formatTime(songDuration - safeSliderProgress)}</span>
                   </div>
                 </div>
               )}
