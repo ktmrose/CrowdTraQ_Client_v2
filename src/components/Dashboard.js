@@ -9,7 +9,8 @@ const Dashboard = (props) => {
   const [tokens, setTokens] = useState(0); //TODO: set from server
   const [providedReaction, setProvidedReaction] = useState(false);
   const [isAddingSong, setIsAddingSong] = useState(false);
-  const { sendMessage, currentSongData } = useWebsocketConnection();
+  const { sendMessage, currentSongData, queueLength } =
+    useWebsocketConnection();
   const [sliderProgress, setSliderProgress] = useState(0);
 
   // Compute safe values for slider and duration
@@ -47,6 +48,7 @@ const Dashboard = (props) => {
 
   useEffect(() => {
     setTokens(12); // Example token value, replace with actual logic
+    setProvidedReaction(false); // Reset reaction when song changes
   }, [currentSongData]);
 
   //TODO: addTokens upon Websocket state push.
@@ -70,6 +72,7 @@ const Dashboard = (props) => {
     <Row className="align-items-center justify-content-center text-center">
       <Col className="text-center">
         <h4 className="mt-4 py-2 fw-bold">Tokens: {tokens}</h4>
+        <h4 className="fw-bold">Queue Length: {queueLength}</h4>
         {isAddingSong ? (
           <AddSong toDashBoard={returnToDashCallback} />
         ) : (

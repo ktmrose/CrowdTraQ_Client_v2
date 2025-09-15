@@ -7,6 +7,7 @@ const WebsocketProvider = (props) => {
   const [messages, setMessages] = useState([]);
   const [currentSongData, setCurrentSongData] = useState(null);
   const [searchData, setSearchData] = useState(null);
+  const [queueLength, setQueueLength] = useState(0);
 
   const clearSearchData = () => setSearchData(null);
 
@@ -24,6 +25,8 @@ const WebsocketProvider = (props) => {
           setCurrentSongData(data.currently_playing);
         } else if (data?.search_data) {
           setSearchData(data);
+        } else if (data?.queue_length) {
+          setQueueLength(data.queue_length);
         }
         setMessages((prevMessages) => {
           const newMessages = [...prevMessages, data];
@@ -70,6 +73,7 @@ const WebsocketProvider = (props) => {
         currentSongData,
         searchData,
         clearSearchData,
+        queueLength,
       }}
       {...props}
     />

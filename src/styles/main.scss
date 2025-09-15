@@ -9,9 +9,9 @@
 
 .animated-bg {
   @include animated-gradient(
-    $dark-bg-grey,
+    $dark-bg-black,
     $dark-bg-blue,
     $dark-bg-magenta,
-    $dark-bg-black
+    $dark-bg-grey
   );
 }
