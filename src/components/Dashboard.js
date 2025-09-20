@@ -5,11 +5,9 @@ import { Row, Col } from "react-bootstrap";
 import { formatTime } from "../common/config";
 
 const Dashboard = (props) => {
-  //props.accessToken to make requests to server
-  const [tokens, setTokens] = useState(0); //TODO: set from server
   const [providedReaction, setProvidedReaction] = useState(false);
   const [isAddingSong, setIsAddingSong] = useState(false);
-  const { sendMessage, currentSongData, queueLength } =
+  const { sendMessage, currentSongData, queueLength, tokens } =
     useWebsocketConnection();
   const [sliderProgress, setSliderProgress] = useState(0);
 
@@ -46,9 +44,9 @@ const Dashboard = (props) => {
     return () => clearInterval(interval);
   }, [sliderProgress, currentSongData, sendMessage]);
 
+  // Reset reaction when song changes
   useEffect(() => {
-    setTokens(12); // Example token value, replace with actual logic
-    setProvidedReaction(false); // Reset reaction when song changes
+    setProvidedReaction(false);
   }, [currentSongData]);
 
   //TODO: addTokens upon Websocket state push.

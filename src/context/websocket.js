@@ -8,6 +8,7 @@ const WebsocketProvider = (props) => {
   const [currentSongData, setCurrentSongData] = useState(null);
   const [searchData, setSearchData] = useState(null);
   const [queueLength, setQueueLength] = useState(0);
+  const [tokens, setTokens] = useState(0);
 
   const clearSearchData = () => setSearchData(null);
 
@@ -25,8 +26,12 @@ const WebsocketProvider = (props) => {
           setCurrentSongData(data.currently_playing);
         } else if (data?.search_data) {
           setSearchData(data);
-        } else if (data?.queue_length) {
+        }
+        if (data?.queue_length !== undefined && data?.queue_length !== null) {
           setQueueLength(data.queue_length);
+        }
+        if (data?.tokens) {
+          setTokens(data.tokens);
         }
         setMessages((prevMessages) => {
           const newMessages = [...prevMessages, data];
@@ -74,6 +79,7 @@ const WebsocketProvider = (props) => {
         searchData,
         clearSearchData,
         queueLength,
+        tokens,
       }}
       {...props}
     />
