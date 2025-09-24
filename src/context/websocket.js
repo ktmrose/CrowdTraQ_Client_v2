@@ -10,6 +10,9 @@ const WebsocketProvider = (props) => {
   const [searchData, setSearchData] = useState(null);
   const [queueLength, setQueueLength] = useState(0);
   const [tokens, setTokens] = useState(0);
+  const [sessionId, setSessionId] = useState(
+    localStorage.getItem("sessionId") || null
+  );
 
   const clearSearchData = () => setSearchData(null);
 
@@ -17,12 +20,18 @@ const WebsocketProvider = (props) => {
     const ws = new WebSocket("ws://localhost:7890");
 
     ws.onopen = () => {
-      console.log("WebSocket connection established");
+      const hello = { sessionId: sessionId || null };
+      ws.send(JSON.stringify(hello));
     };
 
     ws.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
+        if (data.sessionId && !sessionId) {
+          // First time: server assigned ID
+          setSessionId(data.sessionId);
+          localStorage.setItem("sessionId", data.sessionId);
+        }
         if (data?.currently_playing) {
           setCurrentSongData(data.currently_playing);
         } else if (data?.search_data) {
