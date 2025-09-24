@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext } from "react";
+import { isEmpty } from "../common/config";
 
 const WebsocketContext = createContext({});
 
@@ -27,10 +28,10 @@ const WebsocketProvider = (props) => {
         } else if (data?.search_data) {
           setSearchData(data);
         }
-        if (data?.queue_length !== undefined && data?.queue_length !== null) {
+        if (!isEmpty(data?.queue_length)) {
           setQueueLength(data.queue_length);
         }
-        if (data?.tokens) {
+        if (!isEmpty(data?.tokens)) {
           setTokens(data.tokens);
         }
         setMessages((prevMessages) => {
