@@ -7,3 +7,5 @@ export const formatTime = (ms) => {
 export const isEmpty = (value) => {
   return value === undefined || value === null;
 };
+
+export const WS_OPEN = 1;

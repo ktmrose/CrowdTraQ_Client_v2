@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import React, { useState, useEffect } from "react";
 import "./styles/main.scss";
 import Dashboard from "./components/Dashboard";
+import ClosedConnection from "./components/ClosedConnection";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +10,7 @@ import Modal from "react-modal";
 import img from "./CrowdTraQIntro.png";
 import { useWebsocketConnection } from "./context/websocket";
 import { Row, Col, Container } from "react-bootstrap";
+import { WS_OPEN } from "./common/config";
 
 function App() {
   const [showHelpModal, setShowHelpModal] = useState(false);
@@ -103,9 +105,14 @@ function App() {
           <img src={logo} alt="CrowdTraQ logo" className="p-2 px-4" />
         </Col>
       </Row>
+      {/* TODO: provide feedback button */}
       <Row className="justify-content-center">
         <Col xs={12} className="text-center">
-          {socket && <Dashboard />}
+          {socket && socket.readyState === WS_OPEN ? (
+            <Dashboard />
+          ) : (
+            <ClosedConnection />
+          )}
           <i
             className="fas fa-circle-question help-icon mt-4"
             transform="grow-50"
