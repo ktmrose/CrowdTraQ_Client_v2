@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import AddSong from "./AddSong";
 import { useWebsocketConnection } from "../context/websocket";
 import { Row, Col } from "react-bootstrap";
 import { formatTime } from "../common/config";
 
 const Dashboard = (props) => {
-  const [providedReaction, setProvidedReaction] = useState(false);
   const [isAddingSong, setIsAddingSong] = useState(false);
-  const { sendMessage, currentSongData, queueLength, tokens } =
+  const { sendMessage, currentSongData, queueLength, tokens, feedback } =
     useWebsocketConnection();
   const [sliderProgress, setSliderProgress] = useState(0);
+  const [providedReaction, setProvidedReaction] = useState(feedback || false);
 
   // Compute safe values for slider and duration
   const safeSliderProgress = Number.isFinite(sliderProgress)
@@ -49,7 +49,10 @@ const Dashboard = (props) => {
     setProvidedReaction(false);
   }, [currentSongData]);
 
-  //TODO: addTokens upon Websocket state push.
+  useEffect(() => {
+    setProvidedReaction(feedback || false);
+  }, [feedback]);
+
   const addSong = () => {
     setIsAddingSong(true);
   };

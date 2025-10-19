@@ -10,6 +10,7 @@ const WebsocketProvider = (props) => {
   const [searchData, setSearchData] = useState(null);
   const [queueLength, setQueueLength] = useState(0);
   const [tokens, setTokens] = useState(0);
+  const [feedback, setFeedback] = useState(false);
   const [sessionId, setSessionId] = useState(
     localStorage.getItem("sessionId") || null
   );
@@ -42,6 +43,9 @@ const WebsocketProvider = (props) => {
         }
         if (!isEmpty(data?.tokens)) {
           setTokens(data.tokens);
+        }
+        if (data?.client_vote) {
+          setFeedback(data.client_vote);
         }
         setMessages((prevMessages) => {
           const newMessages = [...prevMessages, data];
@@ -90,6 +94,7 @@ const WebsocketProvider = (props) => {
         clearSearchData,
         queueLength,
         tokens,
+        feedback,
       }}
       {...props}
     />
