@@ -9,3 +9,8 @@ export const isEmpty = (value) => {
 };
 
 export const WS_OPEN = 1;
+
+export const errorCodes = {
+  SPOTIFY_API_ERROR: "SPOTIFY_API_ERROR",
+  NOTHING_PLAYING: "NO_TRACK_PLAYING",
+};

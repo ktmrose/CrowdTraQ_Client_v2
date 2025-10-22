@@ -1,5 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
 import { isEmpty } from "../common/config";
+import { useErrorQueue } from "../hooks/useErrorQueue";
+import { errorCodes } from "../common/config";
 
 const WebsocketContext = createContext({});
 
@@ -14,6 +16,7 @@ const WebsocketProvider = (props) => {
   const [sessionId, setSessionId] = useState(
     localStorage.getItem("sessionId") || null
   );
+  const { pushError, popError, currentError } = useErrorQueue();
 
   const clearSearchData = () => setSearchData(null);
 
@@ -46,6 +49,14 @@ const WebsocketProvider = (props) => {
         }
         if (data?.client_vote) {
           setFeedback(data.client_vote);
+        }
+        if (data.error) {
+          if (data.error.code === errorCodes.NOTHING_PLAYING) {
+            //handled in component, no need to push to errorQueue
+            setCurrentSongData(null);
+          } else {
+            pushError(data.error);
+          }
         }
         setMessages((prevMessages) => {
           const newMessages = [...prevMessages, data];
@@ -95,6 +106,8 @@ const WebsocketProvider = (props) => {
         queueLength,
         tokens,
         feedback,
+        currentError,
+        popError,
       }}
       {...props}
     />

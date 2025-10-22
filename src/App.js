@@ -1,13 +1,13 @@
-import logo from "./logo.svg";
+import logo from "./assets/logo.svg";
 import React, { useState, useEffect } from "react";
 import "./styles/main.scss";
 import Dashboard from "./components/Dashboard";
 import ClosedConnection from "./components/ClosedConnection";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
+// import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import Modal from "react-modal";
-import img from "./CrowdTraQIntro.png";
+import img from "./assets/PartyGirlAwkward.png";
 import { useWebsocketConnection } from "./context/websocket";
 import { Row, Col, Container } from "react-bootstrap";
 import { WS_OPEN } from "./common/config";
@@ -113,12 +113,13 @@ function App() {
           ) : (
             <ClosedConnection />
           )}
-          <i
+          {/* This is for the help/info modal */}
+          {/* <i
             className="fas fa-circle-question help-icon mt-4"
             transform="grow-50"
             icon={faCircleQuestion}
             onClick={() => toggleHelpModal()}
-          />
+          /> */}
         </Col>
       </Row>
     </Container>
