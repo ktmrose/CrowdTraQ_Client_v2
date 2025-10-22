@@ -11,6 +11,7 @@ const WebsocketProvider = (props) => {
   const [currentSongData, setCurrentSongData] = useState(null);
   const [searchData, setSearchData] = useState(null);
   const [queueLength, setQueueLength] = useState(0);
+  const [cost, setCost] = useState(0);
   const [tokens, setTokens] = useState(0);
   const [feedback, setFeedback] = useState(false);
   const [sessionId, setSessionId] = useState(
@@ -43,6 +44,9 @@ const WebsocketProvider = (props) => {
         }
         if (!isEmpty(data?.queue_length)) {
           setQueueLength(data.queue_length);
+        }
+        if (!isEmpty(data?.cost)) {
+          setCost(data.cost);
         }
         if (!isEmpty(data?.tokens)) {
           setTokens(data.tokens);
@@ -104,6 +108,7 @@ const WebsocketProvider = (props) => {
         searchData,
         clearSearchData,
         queueLength,
+        cost,
         tokens,
         feedback,
         currentError,

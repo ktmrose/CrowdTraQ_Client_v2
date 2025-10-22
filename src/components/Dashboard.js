@@ -13,6 +13,7 @@ const Dashboard = (props) => {
     sendMessage,
     currentSongData,
     queueLength,
+    cost,
     tokens,
     feedback,
     currentError,
@@ -107,7 +108,7 @@ const Dashboard = (props) => {
             </Toast.Body>
           </Toast>
         </ToastContainer>
-        <HeaderStats tokens={tokens} queueLength={queueLength} />
+        <HeaderStats tokens={tokens} queueLength={queueLength} cost={cost} />
 
         {isAddingSong ? (
           <AddSong toDashBoard={returnToDashCallback} />
