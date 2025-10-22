@@ -5,7 +5,7 @@ import SongDetails from "./SongDetails";
 import UserActions from "./UserActions";
 import { useWebsocketConnection } from "../context/websocket";
 import { Row, Col, ToastContainer, Toast } from "react-bootstrap";
-import { formatTime, errorCodes } from "../common/config";
+import { formatTime } from "../common/config";
 
 const Dashboard = (props) => {
   const [isAddingSong, setIsAddingSong] = useState(false);
