@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import Modal from "react-modal";
-import { useWebsocketConnection } from "../context/websocket";
-import ConfirmSong from "./ConfirmSong";
+import { useEffect, useState } from "react";
+import { useWebsocketConnection } from "../../context/websocket";
+import ConfirmSong from "../ConfirmSong/ConfirmSong";
 
 const AddSong = (props) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -54,7 +53,11 @@ const AddSong = (props) => {
       />
       <form>
         <h1 className="mb-4">Search for track:</h1>
+        <label htmlFor="search-song" className="visually-hidden">
+          Search song
+        </label>
         <input
+          id="search-song"
           type="text"
           name="search-song"
           pattern="^[a-zA-Z0-9]+$"
@@ -101,7 +104,5 @@ const AddSong = (props) => {
     </div>
   );
 };
-
-Modal.setAppElement("#root");
 
 export default AddSong;

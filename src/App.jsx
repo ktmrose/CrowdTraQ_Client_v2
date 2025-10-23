@@ -1,8 +1,8 @@
 import logo from "./assets/logo.svg";
 import React, { useState, useEffect } from "react";
 import "./styles/main.scss";
-import Dashboard from "./components/Dashboard";
-import ClosedConnection from "./components/ClosedConnection";
+import Dashboard from "./components/Dashboard/Dashboard";
+import ClosedConnection from "./components/ClosedConnection/ClosedConnection";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
@@ -125,7 +125,5 @@ function App() {
     </Container>
   );
 }
-
-Modal.setAppElement("#root");
 
 export default App;

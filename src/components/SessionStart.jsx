@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import "./SessionStart.css";
 import { useWebsocketConnection } from "../context/websocket";
 
-//decomissioned with revised architecture. Revivable if server can handle more than one session
+//decomissioned with revised architecture. Revivable if server can handle more than one play session
 const SessionStart = (props) => {
   const { connectWebsocket } = useWebsocketConnection();
   const { register, handleSubmit } = useForm();

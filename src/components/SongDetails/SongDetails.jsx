@@ -1,5 +1,5 @@
 import { Row, Col } from "react-bootstrap";
-import PartyGirlAwkward from "../assets/PartyGirlAwkward.png";
+import PartyGirlAwkward from "../../assets/PartyGirlAwkward.png";
 
 const SongDetails = ({
   currentSongData,
@@ -11,7 +11,7 @@ const SongDetails = ({
     {currentSongData ? (
       <>
         <Col xs={12}>
-          <h1 className="mb-3 my-sm-4 fw-bold">
+          <h1 className="mb-3 my-sm-4 fw-bold" data-testid="song-heading">
             "{currentSongData?.track_name}" by{" "}
             {currentSongData?.artists?.map((artist, index) => (
               <span key={index}>
@@ -31,6 +31,7 @@ const SongDetails = ({
             src={currentSongData?.album_art}
             alt={`${currentSongData?.album} album cover`}
             className="w-100 album-cover"
+            data-testid="album-art"
           />
           {currentSongData && songDuration && (
             <div className="song-progress-wrapper mt-4 p-3">

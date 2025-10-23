@@ -17,12 +17,16 @@ const UserActions = ({
         <Col xs={6} className="text-center">
           <i
             className="fas fa-fire reaction-icon mx-auto"
+            role="button"
+            aria-label="Like"
             onClick={() => sendReaction(true)}
           />
         </Col>
         <Col xs={6} className="text-center">
           <i
             className="fas fa-ban reaction-icon"
+            role="button"
+            aria-label="Dislike"
             onClick={() => sendReaction(false)}
           />
         </Col>

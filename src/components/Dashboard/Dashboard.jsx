@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import AddSong from "./AddSong";
-import HeaderStats from "./HeaderStats";
-import SongDetails from "./SongDetails";
-import UserActions from "./UserActions";
-import { useWebsocketConnection } from "../context/websocket";
+import AddSong from "../AddSong/AddSong";
+import HeaderStats from "../HeaderStats/HeaderStats";
+import SongDetails from "../SongDetails/SongDetails";
+import UserActions from "../UserActions/UserActions";
+import { useWebsocketConnection } from "../../context/websocket";
 import { Row, Col, ToastContainer, Toast } from "react-bootstrap";
-import { formatTime } from "../common/config";
+import { formatTime } from "../../common/config";
 
 const Dashboard = (props) => {
   const [isAddingSong, setIsAddingSong] = useState(false);
