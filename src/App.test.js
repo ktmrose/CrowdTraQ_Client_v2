@@ -2,11 +2,11 @@ import { render, screen } from "@testing-library/react";
 import App from "./App";
 import { WS_OPEN } from "./common/config";
 
-jest.mock("./context/websocket", () => ({
+jest.mock("./context/websocket/websocket", () => ({
   useWebsocketConnection: jest.fn(),
 }));
 
-import { useWebsocketConnection } from "./context/websocket";
+import { useWebsocketConnection } from "./context/websocket/websocket";
 
 describe("App", () => {
   test("renders ClosedConnection when socket is not open", () => {

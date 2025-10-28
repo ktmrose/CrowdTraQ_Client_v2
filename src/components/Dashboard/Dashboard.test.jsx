@@ -26,11 +26,11 @@ jest.mock("../UserActions/UserActions", () => (props) => (
 ));
 
 // Mock websocket context
-jest.mock("../../context/websocket", () => ({
+jest.mock("../../context/websocket/websocket", () => ({
   useWebsocketConnection: jest.fn(),
 }));
 
-import { useWebsocketConnection } from "../../context/websocket";
+import { useWebsocketConnection } from "../../context/websocket/websocket";
 
 describe("Dashboard", () => {
   const mockSendMessage = jest.fn();

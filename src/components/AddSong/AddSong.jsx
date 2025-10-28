@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useWebsocketConnection } from "../../context/websocket";
+import { useWebsocketConnection } from "../../context/websocket/websocket";
 import ConfirmSong from "../ConfirmSong/ConfirmSong";
 
 const AddSong = (props) => {

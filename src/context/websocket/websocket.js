@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
-import { isEmpty } from "../common/config";
-import { useErrorQueue } from "../hooks/useErrorQueue";
-import { errorCodes } from "../common/config";
+import { isEmpty } from "../../common/config";
+import { useErrorQueue } from "../../hooks/useErrorQueue/useErrorQueue";
+import { errorCodes } from "../../common/config";
 
 const WebsocketContext = createContext({});
 

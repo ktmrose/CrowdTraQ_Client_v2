@@ -2,11 +2,11 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import AddSong from "./AddSong";
 
 // Mock the websocket context hook
-jest.mock("../../context/websocket", () => ({
+jest.mock("../../context/websocket/websocket", () => ({
   useWebsocketConnection: jest.fn(),
 }));
 
-import { useWebsocketConnection } from "../../context/websocket";
+import { useWebsocketConnection } from "../../context/websocket/websocket";
 
 beforeEach(() => {
   useWebsocketConnection.mockReturnValue({
@@ -30,7 +30,9 @@ describe("AddSong", () => {
   });
 
   test("calls sendMessage when typing valid input", () => {
-    const { useWebsocketConnection } = require("../../context/websocket");
+    const {
+      useWebsocketConnection,
+    } = require("../../context/websocket/websocket");
     const sendMessageMock = jest.fn();
     useWebsocketConnection.mockReturnValue({
       sendMessage: sendMessageMock,
@@ -50,7 +52,9 @@ describe("AddSong", () => {
   });
 
   test("renders search results when searchData is provided", () => {
-    const { useWebsocketConnection } = require("../../context/websocket");
+    const {
+      useWebsocketConnection,
+    } = require("../../context/websocket/websocket");
     useWebsocketConnection.mockReturnValue({
       sendMessage: jest.fn(),
       clearSearchData: jest.fn(),
@@ -72,7 +76,9 @@ describe("AddSong", () => {
   });
 
   test("calls toDashBoard when Back to Dashboard is clicked", () => {
-    const { useWebsocketConnection } = require("../../context/websocket");
+    const {
+      useWebsocketConnection,
+    } = require("../../context/websocket/websocket");
     useWebsocketConnection.mockReturnValue({
       sendMessage: jest.fn(),
       clearSearchData: jest.fn(),

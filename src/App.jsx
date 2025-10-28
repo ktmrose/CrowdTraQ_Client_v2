@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import Modal from "react-modal";
 import img from "./assets/PartyGirlAwkward.png";
-import { useWebsocketConnection } from "./context/websocket";
+import { useWebsocketConnection } from "./context/websocket/websocket";
 import { Row, Col, Container } from "react-bootstrap";
 import { WS_OPEN } from "./common/config";
 

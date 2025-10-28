@@ -3,7 +3,7 @@ import AddSong from "../AddSong/AddSong";
 import HeaderStats from "../HeaderStats/HeaderStats";
 import SongDetails from "../SongDetails/SongDetails";
 import UserActions from "../UserActions/UserActions";
-import { useWebsocketConnection } from "../../context/websocket";
+import { useWebsocketConnection } from "../../context/websocket/websocket";
 import { Row, Col, ToastContainer, Toast } from "react-bootstrap";
 import { formatTime } from "../../common/config";
 
