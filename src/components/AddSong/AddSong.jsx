@@ -7,7 +7,8 @@ const AddSong = (props) => {
   const [mostRecentSearch, setMostRecentSearch] = useState([]);
   const [selectedSong, setSelectedSong] = useState({});
 
-  const { sendMessage, searchData, clearSearchData } = useWebsocketConnection();
+  const { sendMessage, sendLog, searchData, clearSearchData } =
+    useWebsocketConnection();
 
   const sanitizeInput = (value) => value.replace(/[^a-zA-Z0-9 ]/g, "");
 
@@ -21,6 +22,10 @@ const AddSong = (props) => {
   };
 
   const handleModalCancel = () => {
+    sendLog("debug", "User canceled song addition", {
+      action: "cancel_add_track",
+      track_id: selectedSong.track_id,
+    });
     setSelectedSong({});
     setShowConfirmModal(false);
   };
@@ -28,6 +33,10 @@ const AddSong = (props) => {
   const submitSong = (track) => {
     setShowConfirmModal(false);
     const payload = { action: "add_track", data: { track_id: track.track_id } };
+    sendLog("debug", "User submitted a song to add", {
+      action: "add_track",
+      track_id: track.track_id,
+    });
     sendMessage(payload);
     clearSearchData();
     props.toDashBoard();

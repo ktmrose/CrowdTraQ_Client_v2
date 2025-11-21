@@ -7,10 +7,11 @@ import { useWebsocketConnection } from "../../context/websocket/websocket";
 import { Row, Col, ToastContainer, Toast } from "react-bootstrap";
 import { formatTime } from "../../common/config";
 
-const Dashboard = (props) => {
+const Dashboard = () => {
   const [isAddingSong, setIsAddingSong] = useState(false);
   const {
     sendMessage,
+    sendLog,
     currentSongData,
     queueLength,
     cost,
@@ -77,10 +78,17 @@ const Dashboard = (props) => {
   };
 
   const addSong = () => {
+    sendLog("debug", "User initiated adding a new song", {
+      action: "add_song",
+    });
     setIsAddingSong(true);
   };
 
   const sendReaction = (likesTrack) => {
+    sendLog("debug", "User provided song reaction", {
+      action: likesTrack ? "like_track" : "dislike_track",
+      song: currentSongData?.id || "unknown",
+    });
     sendMessage({
       action: `${likesTrack ? "like_track" : "dislike_track"}`,
       data: {},
@@ -89,6 +97,9 @@ const Dashboard = (props) => {
   };
 
   const returnToDashCallback = () => {
+    sendLog("debug", "User returned to dashboard from adding song", {
+      action: "return_to_dashboard",
+    });
     setIsAddingSong(false);
   };
 

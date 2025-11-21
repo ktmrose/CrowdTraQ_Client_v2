@@ -2,6 +2,7 @@ import React, { createContext, useState, useContext } from "react";
 import { isEmpty } from "../../common/config";
 import { useErrorQueue } from "../../hooks/useErrorQueue/useErrorQueue";
 import { errorCodes } from "../../common/config";
+import { clearPendingLogs, loadPendingLogs } from "../../common/loggingHelpers";
 
 const WebsocketContext = createContext({});
 
@@ -18,6 +19,7 @@ const WebsocketProvider = (props) => {
     localStorage.getItem("sessionId") || null
   );
   const { pushError, popError, currentError } = useErrorQueue();
+  const [logQueue, setLogQueue] = useState(loadPendingLogs());
 
   const clearSearchData = () => setSearchData(null);
 
@@ -27,11 +29,25 @@ const WebsocketProvider = (props) => {
     ws.onopen = () => {
       const hello = { sessionId: sessionId || null };
       ws.send(JSON.stringify(hello));
+      sendLog("info", "WebSocket connection established", { method: "onopen" });
+      if (logQueue.length > 0) {
+        logQueue.forEach((log) => {
+          ws.send(JSON.stringify({ type: "LOG_EVENT", payload: log }));
+        });
+        clearPendingLogs();
+        setLogQueue([]); // clear after flush
+      }
     };
 
     ws.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
+        sendLog("debug", "Recieved message from server:", {
+          method: "onmessage",
+          payloadType: Object.keys(event.data),
+          sessionId,
+          timestamp: new Date().toISOString(),
+        });
         if (data.sessionId && !sessionId) {
           // First time: server assigned ID
           setSessionId(data.sessionId);
@@ -68,16 +84,22 @@ const WebsocketProvider = (props) => {
         });
       } catch (err) {
         // Fallback for non-JSON messages
-        console.log("Raw, unprocessed message from server:", event.data);
+        sendLog("warning", "Raw, unprocessed message from server:", {
+          method: "onmessage",
+          payloadType: Object.keys(event.data),
+        });
       }
     };
 
     ws.onclose = () => {
-      console.log("WebSocket connection closed");
+      sendLog("info", "WebSocket connection closed", { method: "onclose" });
     };
 
     ws.onerror = (error) => {
-      console.error("WebSocket error:", error);
+      sendLog("error", "WebSocket encountered an error:", {
+        method: "onerror",
+        error: error,
+      });
     };
 
     setSocket(ws);
@@ -90,6 +112,10 @@ const WebsocketProvider = (props) => {
   };
 
   const sendMessage = (message) => {
+    sendLog("debug", "Sending message to server:", {
+      method: "sendMessage",
+      payload: message,
+    });
     if (socket && socket.readyState === WebSocket.OPEN) {
       socket.send(JSON.stringify(message));
     } else {
@@ -97,10 +123,29 @@ const WebsocketProvider = (props) => {
     }
   };
 
+  const sendLog = (level, message, context = {}) => {
+    const entry = {
+      level,
+      message,
+      context,
+      timestamp: new Date().toISOString(),
+      source: "frontend",
+      sessionId,
+    };
+
+    if (socket && socket.readyState === WebSocket.OPEN) {
+      socket.send(JSON.stringify({ action: "LOG_EVENT", data: entry }));
+    } else {
+      // buffer until reconnect
+      setLogQueue((prev) => [...prev, entry]);
+    }
+  };
+
   return (
     <WebsocketContext.Provider
       value={{
         sendMessage,
+        sendLog,
         connectWebsocket,
         socket,
         messages,
