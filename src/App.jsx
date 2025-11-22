@@ -1,20 +1,17 @@
-import logo from "./assets/logo.svg";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./styles/main.scss";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ClosedConnection from "./components/ClosedConnection/ClosedConnection";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
-import Modal from "react-modal";
-import img from "./assets/PartyGirlAwkward.png";
 import { useWebsocketConnection } from "./context/websocket/websocket";
-import { Row, Col, Container } from "react-bootstrap";
-import { WS_OPEN, feedbackEnabled } from "./common/config";
+import { Row, Col, Container, Modal } from "react-bootstrap";
+import { WS_OPEN, feedbackEnabled, FEEDBACK_API_URL } from "./common/config";
 
 function App() {
-  const [showHelpModal, setShowHelpModal] = useState(false);
+  const [showFeedbackModal, setShowFeedbackModal] = useState(false);
   const { connectWebsocket, socket } = useWebsocketConnection();
+  const [feedbackMessage, setFeedbackMessage] = useState("");
+  const [feedbackName, setFeedbackName] = useState("");
+  const [feedbackErrorMessage, setFeedbackErrorMessage] = useState("");
 
   //connect to server only once upon app load
   useEffect(() => {
@@ -22,83 +19,101 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const toggleHelpModal = () => {
-    if (showHelpModal) {
-      setShowHelpModal(false);
+  const toggleFeedbackModal = () => {
+    if (showFeedbackModal) {
+      setShowFeedbackModal(false);
     } else {
-      setShowHelpModal(true);
+      setShowFeedbackModal(true);
+    }
+  };
+
+  const submitFeedback = async () => {
+    if (feedbackMessage.trim() === "") {
+      setFeedbackErrorMessage(
+        "Fine! If you don't want to say anything, then just close this modal and enjoy the vibes!"
+      );
+      return;
+    }
+    const nameToSend = feedbackName.trim() === "" ? "Anonymous" : feedbackName;
+    try {
+      const response = await fetch(FEEDBACK_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: nameToSend,
+          message: feedbackMessage,
+          sessionId: localStorage.getItem("sessionId") || null,
+        }),
+      });
+
+      if (response.ok) {
+        console.log("Feedback sent successfully!");
+        setFeedbackName("");
+        setFeedbackMessage("");
+        setFeedbackErrorMessage(""); // clear any previous error
+        toggleFeedbackModal();
+      } else {
+        setFeedbackErrorMessage(
+          "Oops, something went wrong sending your feedback."
+        );
+      }
+    } catch (error) {
+      setFeedbackErrorMessage("Network error — please try again later.");
     }
   };
 
   return (
     <Container className="p-3 animated-bg w-100 App">
-      <Modal isOpen={showHelpModal} className="modal-body p-2">
-        <FontAwesomeIcon
-          className="close-icon"
-          icon={faXmark}
-          onClick={() => toggleHelpModal()}
-        ></FontAwesomeIcon>
-        <h1>What is</h1>
-        <img src={logo} alt="CrowdTraQ" className="intro-img"></img>
-        <h3>Responsive playlist built by the Crowd</h3>
-        <img src={img} alt="Why is CrowdTraQ?" className="intro-img" />
-        <p style={{ textAlign: "left" }}>
-          Have you passed the aux cord only to realize with utter despair that
-          you have relinquished control to someone who thinks good music is
-          nothing more than a hideous disgrace against nature itself?
-          <br></br>
-          <br></br>
-          Previously you had to be the authoritarian to take back control, or
-          perhaps you relied on your trusted allies to publically shame the
-          offender. You can do that still, but now with{" "}
-          <strong>CrowdTraQ</strong>, based on the majority of the crowd. A
-          little group-think never hurt anyone...{" "}
-          <span role="img" aria-label="upside-down-face">
-            🙃
-          </span>
-          <br></br>
-          <br></br>
-          Everyone begins with 12 tokens (first round is on the house). Use
-          these tokens to queue up songs of your choice (as long as they are on
-          Spotify), but the number of tokens required to add songs{" "}
-          <em>increases</em> with the size of the queue. If you don't have
-          enough tokens to add now, don't worry; if there are no songs queued
-          up, adding a song is free!
-          <br></br>
-          <br></br>
-          Want more tokens? Add songs that you think the majority of people will
-          like, at least enough to hit the{" "}
-          <span role="img" aria-label="fire">
-            🔥
-          </span>{" "}
-          button anyway. Yes, you can give yourself the shameless self-vote --
-          don't worry, I won't tell anybody.{" "}
-          <span role="img" aria-label="wink">
-            😉
-          </span>
-          <br></br>
-          <br></br>
-          Trolls, beware! If the majority of people hate a song that you had
-          queued up so much they hit the dislike button, that song ends (even
-          before it officially does) and you don't even get a refund.{" "}
-          <span role="img" aria-label="bawling">
-            😭
-          </span>
-          <br></br>
-          <br></br>
-          <span role="img" aria-label="celebration">
-            🎉
-          </span>{" "}
-          So get the room code from the party host and add to the party vibes!
-          <span role="img" aria-label="celebration">
-            🎉
-          </span>
-        </p>
-        <h3>Credits:</h3>
-        <p>
-          <a href="https://github.com/ktmrose/CrowdTraQ_Client_v2">@ktmrose</a>{" "}
-          - Project architecture, UI/UX design
-        </p>
+      <Modal
+        show={showFeedbackModal}
+        onHide={toggleFeedbackModal}
+        className="p-2"
+        centered
+        dialogClassName="feedback-modal"
+      >
+        <Modal.Header closeButton className="border-0">
+          <h1 className="text-center w-100 modal-title">
+            Send message directly to the app creator
+          </h1>
+        </Modal.Header>
+        <Modal.Body className="mb-3">
+          <p className="pb-3">
+            Did you find a bug? Is there a feature you would really like to see
+            built for the next version? <br />
+            Or do you just really like this app and want to be friends with
+            whoever created this app? <br />
+            <br />
+            This portal is set up specifically for you to give personalized
+            feedback, or just say hi and say how much you love CrowdTraQ!
+          </p>
+          {feedbackErrorMessage && (
+            <div className="alert alert-danger mt-2">
+              {feedbackErrorMessage}
+            </div>
+          )}
+          <input
+            id="feedbackName"
+            placeholder="Name"
+            type="text"
+            className="form-control feedback-input mb-3"
+            value={feedbackName}
+            onChange={(e) => setFeedbackName(e.target.value)}
+          />
+          <textarea
+            placeholder="Speak your mind!"
+            rows={6}
+            value={feedbackMessage}
+            onChange={(e) => setFeedbackMessage(e.target.value)}
+            className="w-100 my-3 form-control feedback-textarea"
+          />
+          <div className="text-center pt-3">
+            <button className="feedback-cta my-2" onClick={submitFeedback}>
+              Send it off!
+            </button>
+          </div>
+        </Modal.Body>
       </Modal>
       <Row>
         <Col xs={12} className="text-center">
@@ -107,7 +122,6 @@ function App() {
           </h1>
         </Col>
       </Row>
-      {/* TODO: provide feedback button */}
       <Row className="justify-content-center">
         <Col xs={12} className="text-center">
           {socket && socket.readyState === WS_OPEN ? (
@@ -115,16 +129,11 @@ function App() {
           ) : (
             <ClosedConnection />
           )}
-          {/* This is for the help/info modal */}
-          {/* <i
-            className="fas fa-circle-question help-icon mt-4"
-            transform="grow-50"
-            icon={faCircleQuestion}
-            onClick={() => toggleHelpModal()}
-          /> */}
           {feedbackEnabled && (
             <div className="footer">
-              <button className="feedback-cta">How are the vibes?</button>
+              <button className="feedback-cta" onClick={toggleFeedbackModal}>
+                How are the vibes?
+              </button>
             </div>
           )}
         </Col>

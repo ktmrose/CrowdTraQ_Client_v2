@@ -127,3 +127,36 @@
   border-radius: 12px;
   box-shadow: 0 0 30px #8f5cff, 0 0 60px #ff6ec7;
 }
+
+.feedback-modal .modal-content {
+  background-color: $color-bg; // black background
+  color: $color-text;
+  border: 2px solid $color-strong;
+  @include vapor-glow($color-strong, $color-shadow);
+}
+
+.feedback-modal .modal-body p {
+  overflow: hidden; // hide scrollbar
+  scrollbar-width: none; // Firefox
+}
+
+.feedback-modal .modal-body::-webkit-scrollbar {
+  display: none; // Chrome, Safari
+}
+
+.feedback-modal .btn-close {
+  filter: invert(1);
+  opacity: 0.9;
+}
+
+.feedback-textarea {
+  background: $color-bg;
+  color: $color-text;
+  border: 2px solid $color-accent;
+  border-radius: 8px;
+  @include vapor-glow($color-accent, $color-strong);
+  resize: none; // prevent awkward resize handles
+  font-family: $font-primary;
+  font-size: 1rem;
+  padding: 1rem;
+}

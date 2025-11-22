@@ -18,3 +18,6 @@ export const errorCodes = {
 };
 
 export const feedbackEnabled = REACT_APP_ENV !== "prod";
+
+export const FEEDBACK_API_URL =
+  "https://fri3upkwf2fqqteqszzjmg5uva0perxq.lambda-url.us-east-1.on.aws/";
