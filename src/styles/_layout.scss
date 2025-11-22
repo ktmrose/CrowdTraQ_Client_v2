@@ -29,10 +29,14 @@
 
 /* Footer */
 .footer {
+  position: fixed; // stick to viewport
+  bottom: 0; // anchor at bottom
+  left: 0;
+  width: 100%; // span full width
   padding: 1rem;
   text-align: center;
-  font-size: 0.9rem;
-  color: $color-text;
+  background: rgba(13, 13, 13, 0.95); // match header vibe
   border-top: 2px solid $color-strong;
   @include vapor-glow($color-strong, $color-shadow);
+  z-index: 999;
 }

@@ -14,6 +14,25 @@
   @include gradient-text($color-accent, $color-text);
 }
 
+.feedback-cta {
+  background-color: $color-focus;
+  color: $color-bg;
+  font-family: $font-secondary;
+  font-size: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+  @include vapor-glow($color-strong, $color-shadow);
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: $color-strong;
+    color: #fff;
+    @include vapor-glow($color-accent, $color-strong);
+  }
+}
+
 .vapor-input {
   width: 100%;
   max-width: 400px;

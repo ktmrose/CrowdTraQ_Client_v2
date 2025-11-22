@@ -122,7 +122,11 @@ function App() {
             icon={faCircleQuestion}
             onClick={() => toggleHelpModal()}
           /> */}
-          {feedbackEnabled && <button>How are the vibes?</button>}
+          {feedbackEnabled && (
+            <div className="footer">
+              <button className="feedback-cta">How are the vibes?</button>
+            </div>
+          )}
         </Col>
       </Row>
     </Container>
