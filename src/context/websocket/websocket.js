@@ -42,12 +42,6 @@ const WebsocketProvider = (props) => {
     ws.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        sendLog("debug", "Recieved message from server:", {
-          method: "onmessage",
-          payloadType: Object.keys(event.data),
-          sessionId,
-          timestamp: new Date().toISOString(),
-        });
         if (data.sessionId && !sessionId) {
           // First time: server assigned ID
           setSessionId(data.sessionId);
@@ -134,7 +128,7 @@ const WebsocketProvider = (props) => {
     };
 
     if (socket && socket.readyState === WebSocket.OPEN) {
-      socket.send(JSON.stringify({ action: "LOG_EVENT", data: entry }));
+      socket.send(JSON.stringify({ action: "log_event", data: entry }));
     } else {
       // buffer until reconnect
       setLogQueue((prev) => [...prev, entry]);

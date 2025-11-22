@@ -10,7 +10,7 @@ import Modal from "react-modal";
 import img from "./assets/PartyGirlAwkward.png";
 import { useWebsocketConnection } from "./context/websocket/websocket";
 import { Row, Col, Container } from "react-bootstrap";
-import { WS_OPEN } from "./common/config";
+import { WS_OPEN, feedbackEnabled } from "./common/config";
 
 function App() {
   const [showHelpModal, setShowHelpModal] = useState(false);
@@ -31,7 +31,7 @@ function App() {
   };
 
   return (
-    <Container className="App p-3 animated-bg">
+    <Container className="p-3 animated-bg w-100 App">
       <Modal isOpen={showHelpModal} className="modal-body p-2">
         <FontAwesomeIcon
           className="close-icon"
@@ -100,9 +100,11 @@ function App() {
           - Project architecture, UI/UX design
         </p>
       </Modal>
-      <Row className="justify-content-center">
-        <Col xs={"auto"}>
-          <img src={logo} alt="CrowdTraQ logo" className="p-2 px-4" />
+      <Row>
+        <Col xs={12} className="text-center">
+          <h1 className="w-100 header pt-2 border-info rounded fw-bolder">
+            CrowdTraQ
+          </h1>
         </Col>
       </Row>
       {/* TODO: provide feedback button */}
@@ -120,6 +122,7 @@ function App() {
             icon={faCircleQuestion}
             onClick={() => toggleHelpModal()}
           /> */}
+          {feedbackEnabled && <button>How are the vibes?</button>}
         </Col>
       </Row>
     </Container>

@@ -1,7 +1,7 @@
 // _variables.scss
 $font-primary: "Orbitron", sans-serif;
-$font-secondary: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-  "Lucida Sans", Arial, sans-serif;
+$font-secondary: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode",
+  sans-serif;
 
 $color-bg: #010101;
 $color-text: #b9ffff;
@@ -28,5 +28,12 @@ $dark-bg-blue: #153366;
 $dark-bg-magenta: #66205a;
 $dark-bg-grey: #3d4050;
 
-$gradient-input: linear-gradient(135deg, #ff00cc, #3333ff);
-$gradient-focus: linear-gradient(135deg, #3333ff, #ff00cc);
+$app-pink: #ff00cc;
+$app-blue: #3333ff;
+$app-purple: #440bd4;
+
+$logo-primary: #e92efb;
+$logo-secondary: #33ffff;
+
+$gradient-input: linear-gradient(135deg, $app-pink, $app-blue);
+$gradient-focus: linear-gradient(135deg, $app-blue, $app-pink);

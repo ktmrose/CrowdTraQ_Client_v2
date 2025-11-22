@@ -1,3 +1,5 @@
+const REACT_APP_ENV = process.env.REACT_APP_ENV || "dev";
+
 export const formatTime = (ms) => {
   const minutes = Math.floor(ms / 1000 / 60);
   const seconds = Math.floor((ms / 1000) % 60);
@@ -14,3 +16,5 @@ export const errorCodes = {
   SPOTIFY_API_ERROR: "SPOTIFY_API_ERROR",
   NOTHING_PLAYING: "NO_TRACK_PLAYING",
 };
+
+export const feedbackEnabled = REACT_APP_ENV !== "prod";

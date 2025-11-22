@@ -1,25 +1,11 @@
 @use "variables";
 @use "mixins";
 
-/* Main container */
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
 /* Flex utilities */
 .flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-/* Grid utilities */
-.grid-2col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
 }
 
 /* Section wrappers with neon borders and glow */
@@ -31,15 +17,14 @@
   @include scanlines();
 }
 
-/* Sticky header */
 .header {
-  position: sticky;
-  top: 0;
-  background: rgba(13, 13, 13, 0.95);
-  padding: 1rem 2rem;
-  border-bottom: 2px solid $color-accent;
-  @include vapor-glow($color-accent, $color-strong);
-  z-index: 1000;
+  font-family: $font-secondary;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 2.5rem;
+  @include gradient-text($logo-primary, $logo-secondary);
+  // -webkit-text-stroke: 1px $app-purple;
+  border-bottom: 3px solid $color-strong;
 }
 
 /* Footer */
