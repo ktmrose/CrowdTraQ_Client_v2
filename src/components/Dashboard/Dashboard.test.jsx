@@ -35,11 +35,13 @@ import { useWebsocketConnection } from "../../context/websocket/websocket";
 describe("Dashboard", () => {
   const mockSendMessage = jest.fn();
   const mockPopError = jest.fn();
+  const mockSendLog = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
     useWebsocketConnection.mockReturnValue({
       sendMessage: mockSendMessage,
+      sendLog: mockSendLog,
       currentSongData: {
         track_name: "Test Song",
         duration_ms: 200000,
