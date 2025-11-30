@@ -1,5 +1,13 @@
 const REACT_APP_ENV = process.env.REACT_APP_ENV || "dev";
 
+export let WS_URL = "";
+if (REACT_APP_ENV === "prod") {
+  WS_URL = "a tbd websocket url";
+} else {
+  const host = window.location.hostname;
+  WS_URL = `ws://${host}:7890`;
+}
+
 export const formatTime = (ms) => {
   const minutes = Math.floor(ms / 1000 / 60);
   const seconds = Math.floor((ms / 1000) % 60);

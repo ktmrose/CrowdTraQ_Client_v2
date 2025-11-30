@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
 import { isEmpty } from "../../common/config";
 import { useErrorQueue } from "../../hooks/useErrorQueue/useErrorQueue";
-import { errorCodes } from "../../common/config";
+import { errorCodes, WS_URL } from "../../common/config";
 import { clearPendingLogs, loadPendingLogs } from "../../common/loggingHelpers";
 
 const WebsocketContext = createContext({});
@@ -24,7 +24,7 @@ const WebsocketProvider = (props) => {
   const clearSearchData = () => setSearchData(null);
 
   const connectWebsocket = () => {
-    const ws = new WebSocket("ws://localhost:7890");
+    const ws = new WebSocket(WS_URL);
 
     ws.onopen = () => {
       const hello = { sessionId: sessionId || null };
