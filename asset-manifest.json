@@ -1,18 +1,24 @@
 {
   "files": {
-    "main.css": "/CrowdTraQ_Client_v2/static/css/main.bc31d416.css",
-    "main.js": "/CrowdTraQ_Client_v2/static/js/main.92790548.js",
-    "static/js/787.1350a070.chunk.js": "/CrowdTraQ_Client_v2/static/js/787.1350a070.chunk.js",
-    "static/media/CrowdTraQIntro.png": "/CrowdTraQ_Client_v2/static/media/CrowdTraQIntro.758be8666dd838b44eaa.png",
-    "static/media/CD_Reflection_background.png": "/CrowdTraQ_Client_v2/static/media/CD_Reflection_background.55927c39d6d672f33633.png",
-    "static/media/logo.svg": "/CrowdTraQ_Client_v2/static/media/logo.da562bddcbffd50515b3656d9757476c.svg",
+    "main.css": "/CrowdTraQ_Client_v2/static/css/main.2f8ca1dc.css",
+    "main.js": "/CrowdTraQ_Client_v2/static/js/main.e93f96fb.js",
+    "static/js/453.4c4c3866.chunk.js": "/CrowdTraQ_Client_v2/static/js/453.4c4c3866.chunk.js",
+    "static/media/PartyGirlAwkward.png": "/CrowdTraQ_Client_v2/static/media/PartyGirlAwkward.46bac9bb2391d688325a.png",
+    "static/media/fa-solid-900.ttf": "/CrowdTraQ_Client_v2/static/media/fa-solid-900.2582b0e4bcf85eceead0.ttf",
+    "static/media/fa-brands-400.ttf": "/CrowdTraQ_Client_v2/static/media/fa-brands-400.1815e00441357e01619e.ttf",
+    "static/media/fa-solid-900.woff2": "/CrowdTraQ_Client_v2/static/media/fa-solid-900.2463b90d9a316e4e5294.woff2",
+    "static/media/fa-brands-400.woff2": "/CrowdTraQ_Client_v2/static/media/fa-brands-400.c210719e60948b211a12.woff2",
+    "static/media/fa-regular-400.ttf": "/CrowdTraQ_Client_v2/static/media/fa-regular-400.914997e1bdfc990d0897.ttf",
+    "static/media/fa-regular-400.woff2": "/CrowdTraQ_Client_v2/static/media/fa-regular-400.89999bdf5d835c012025.woff2",
+    "static/media/fa-v4compatibility.ttf": "/CrowdTraQ_Client_v2/static/media/fa-v4compatibility.da94ef451f4969af06e6.ttf",
+    "static/media/fa-v4compatibility.woff2": "/CrowdTraQ_Client_v2/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
     "index.html": "/CrowdTraQ_Client_v2/index.html",
-    "main.bc31d416.css.map": "/CrowdTraQ_Client_v2/static/css/main.bc31d416.css.map",
-    "main.92790548.js.map": "/CrowdTraQ_Client_v2/static/js/main.92790548.js.map",
-    "787.1350a070.chunk.js.map": "/CrowdTraQ_Client_v2/static/js/787.1350a070.chunk.js.map"
+    "main.2f8ca1dc.css.map": "/CrowdTraQ_Client_v2/static/css/main.2f8ca1dc.css.map",
+    "main.e93f96fb.js.map": "/CrowdTraQ_Client_v2/static/js/main.e93f96fb.js.map",
+    "453.4c4c3866.chunk.js.map": "/CrowdTraQ_Client_v2/static/js/453.4c4c3866.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bc31d416.css",
-    "static/js/main.92790548.js"
+    "static/css/main.2f8ca1dc.css",
+    "static/js/main.e93f96fb.js"
   ]
 }
