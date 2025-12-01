@@ -5,7 +5,7 @@ if (REACT_APP_ENV === "prod") {
   WS_URL = "a tbd websocket url";
 } else {
   const host = window.location.hostname;
-  WS_URL = `ws://${host}:7890`;
+  WS_URL = `wss://${host}:7890`;
 }
 
 export const formatTime = (ms) => {
@@ -25,7 +25,5 @@ export const errorCodes = {
   NOTHING_PLAYING: "NO_TRACK_PLAYING",
 };
 
-export const feedbackEnabled = REACT_APP_ENV !== "prod";
-
-export const FEEDBACK_API_URL =
-  "https://fri3upkwf2fqqteqszzjmg5uva0perxq.lambda-url.us-east-1.on.aws/";
+export const feedbackEnabled =
+  REACT_APP_ENV !== "prod" && process.env.ENABLE_FEEDBACK;
