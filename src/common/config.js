@@ -1,12 +1,9 @@
 const REACT_APP_ENV = process.env.REACT_APP_ENV || "dev";
 
-export let WS_URL = "";
-if (REACT_APP_ENV === "prod") {
-  WS_URL = "a tbd websocket url";
-} else {
-  const host = window.location.hostname;
-  WS_URL = `wss://${host}:7890`;
-}
+const host = window.location.hostname;
+export let WS_URL = process.env.REACT_APP_SERVER_URL
+  ? process.env.REACT_APP_SERVER_URL
+  : `ws://${host}:7890`;
 
 export const formatTime = (ms) => {
   const minutes = Math.floor(ms / 1000 / 60);
@@ -26,4 +23,4 @@ export const errorCodes = {
 };
 
 export const feedbackEnabled =
-  REACT_APP_ENV !== "prod" && process.env.ENABLE_FEEDBACK;
+  REACT_APP_ENV !== "prod" && process.env.REACT_APP_ENABLE_FEEDBACK;

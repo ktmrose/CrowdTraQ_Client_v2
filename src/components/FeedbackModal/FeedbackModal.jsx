@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Modal, Spinner } from "react-bootstrap";
-const FEEDBACK_API_URL = process.env.FEEDBACK_API_URL;
+const FEEDBACK_API_URL = process.env.REACT_APP_FEEDBACK_URL;
 
 const FeedbackModal = ({ showFeedbackModal, toggleFeedbackModal }) => {
   const [feedbackMessage, setFeedbackMessage] = useState("");
